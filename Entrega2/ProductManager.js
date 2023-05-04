@@ -1,4 +1,4 @@
-import fs, { writeFileSync } from "fs";
+import fs, { writeFileSync, readFileSync } from "fs";
 /* Agregar modulos archivos */
 class ProductManager {
   constructor() {

@@ -32,7 +32,7 @@ export default class ProductManager {
   async getProductById(id) {
     await this.getProduct();
     if (this.products.length > 0) {
-      let a = this.products.find((prodid) => prodid.id === id);
+      let a = this.products.find((prodid) => prodid.id == id);
       if (!a) a = "Product not found";
       return a;
     } else {

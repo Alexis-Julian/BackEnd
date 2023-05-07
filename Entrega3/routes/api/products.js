@@ -12,15 +12,12 @@ app.get("/products", async (req, res) => {
   let products = await ProductManagerI.getProduct();
   let { limits } = req.query;
   limits = parseInt(limits);
-  if (limits) {
-    res.send(products.slice(0, limits));
-  } else {
-    res.send(products);
-  }
+  limits ? (products = products.slice(0, limits)) : (products = products);
+
+  return res.status(200).send(products);
 });
-app.get("/products/:id", async (req, res) => {
-  let id;
-  id = parseInt(req.params.id);
-  let product = await ProductManagerI.getProductById(id);
+app.get("/products/:pid", async (req, res) => {
+  let data = req.params.pid;
+  let product = await ProductManagerI.getProductById(data);
   res.send(product);
 });

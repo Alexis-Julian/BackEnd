@@ -42,7 +42,6 @@ let product1 = {
 console.log(ProductManagerI.getProducts());
 ProductManagerI.addProduct(product);
 ProductManagerI.addProduct(product1);
-ProductManagerI.addProduct(product);
 console.log(ProductManagerI.getProductById(2));
 console.log(ProductManagerI.getProductById(0));
 ProductManagerI.getProducts();

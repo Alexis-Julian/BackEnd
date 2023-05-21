@@ -1,0 +1,201 @@
+[
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abc12234",
+    "stock": 25,
+    "id": 1
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abc12d34",
+    "stock": 25,
+    "id": 2
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abc123d34",
+    "stock": 25,
+    "id": 3
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abc12dh34",
+    "stock": 25,
+    "id": 5
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abc1y2d34",
+    "stock": 25,
+    "id": 6
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "ambc12d34",
+    "stock": 25,
+    "id": 7
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abbc12d34",
+    "stock": 25,
+    "id": 8
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "ajbc12d34",
+    "stock": 25,
+    "id": 9
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abvc12d34",
+    "stock": 25,
+    "id": 10
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "abcs12d34",
+    "stock": 25,
+    "id": 11
+  },
+  {
+    "title": "producto prueba",
+    "descripcion": "esto es un producto prueba",
+    "price": 200,
+    "thumbnail": "Sin Imagen",
+    "code": "apbc12d34",
+    "stock": 25,
+    "id": 12
+  },
+  {
+    "title": "producto prueba",
+    "description": "esto es un producto prueba",
+    "price": 200,
+    "code": "abc12a43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 13
+  },
+  {
+    "title": "producto prueba",
+    "description": "esto es un producto prueba",
+    "price": 200,
+    "code": "abc19a43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 14
+  },
+  {
+    "title": "producto prueba",
+    "description": "esto es un producto prueba",
+    "price": 200,
+    "code": "aba364a43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 16
+  },
+  {
+    "title": "producto prueba",
+    "description": "esto es un producto prueba",
+    "price": 200,
+    "code": "abaa4a43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 17
+  },
+  {
+    "title": "producto mely",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "aagwag4fa43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 16
+  },
+  {
+    "title": "producto medly",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "aagwag4fgda43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 17
+  },
+  {
+    "title": "producto medly",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "agffgda43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 18
+  },
+  {
+    "title": "EL BENJITAAA",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "aFfgda43",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 19
+  },
+  {
+    "title": "Mi hermosa mely",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "gasijdbasd",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 20
+  },
+  {
+    "title": "Mi hermosa la otra",
+    "description": "Soy un pedazo de nashei",
+    "price": 200,
+    "code": "gasijdggsd",
+    "stock": 25,
+    "status": true,
+    "category": "asd",
+    "id": 21
+  }
+]

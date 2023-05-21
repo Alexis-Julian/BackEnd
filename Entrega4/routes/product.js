@@ -35,6 +35,5 @@ app.put("/:pid", async (req, res) => {
 
 app.delete("/:pid", async (req, res) => {
   let msg = await ProductManagerI.deleteProduct(req.params.pid);
-
   STATUS_RES_GET(msg, res);
 });

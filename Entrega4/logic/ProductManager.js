@@ -49,12 +49,14 @@ export default class ProductManager {
         !this.products.some((pro) => pro.code === product.code) ||
         this.modeproduct == false
       ) {
-        this.products.push({
+        let index = this.products.length - 1;
+        product = {
           ...product,
-          id: this.products.length,
-        });
+          id: this.products[index].id + 1,
+        };
+        this.products.push(product);
         this.writeFile(this.products);
-        msg = [`The product add succesfully `, STATUS_TYPES.INFO];
+        msg = [product, STATUS_TYPES.INFO];
       } else {
         msg = ["The product is already repeated", STATUS_TYPES.WARNING];
       }

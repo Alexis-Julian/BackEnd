@@ -22,9 +22,8 @@ app.get("/:pid", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  let product = await req.body;
   let msg = await ProductManagerI.addProduct(await req.body);
-  io.emit("newproduct", product);
+  io.emit("newproduct", msg[0]);
   STATUS_RES_GET(msg, res);
 });
 

@@ -8,7 +8,7 @@ export const STATUS_TYPES = Object.freeze({
 
 export const VERBS_HTTP = Object.freeze({
   GET: Symbol(),
-  PUSH: Symbol(),
+  POST: Symbol(),
   PUT: Symbol(),
   DELETE: Symbol(),
 });
@@ -19,8 +19,14 @@ export const FETCHINGS = async (url, params, method) => {
     res = await fetch(`${url}${params}`)
       .then((response) => response.json())
       .catch((error) => error);
-  } else if (method === VERBS_HTTP.PUSH) {
-    /* PENDIENTE */
+  } else if (method === VERBS_HTTP.POST) {
+    res = await fetch(`${url}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: params,
+    })
+      .then((response) => response.json())
+      .catch((error) => error);
   } else if (method === VERBS_HTTP.PUT) {
     /* PENDIENTE */
   } else if (method === VERBS_HTTP.DELETE) {

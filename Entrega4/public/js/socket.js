@@ -10,8 +10,12 @@ export const DELETE_SOCKET_ON_PRODUCT = (divlist) => {
   socket.on("deleteproduct", (res) => RemovePrUi(res, divlist));
 };
 
-export const POST_SOCKET_ON_PRODUCT = () => {
-  socket.on("newproduct", (product) => {
-    divlist.innerHTML += `<li>${JSON.stringify(product)}</li`;
+export const POST_SOCKET_EMIT_PRODUCT = (res) => {
+  socket.emit("newproduct", res);
+};
+
+export const POST_SOCKET_ON_PRODUCT = (divlist) => {
+  socket.on("newproduct", (res) => {
+    divlist.innerHTML += `<li>${JSON.stringify(res)}</li>`;
   });
 };

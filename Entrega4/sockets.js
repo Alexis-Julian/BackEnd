@@ -13,5 +13,14 @@ export const SocketIo = (io) => {
       console.log(res);
       socket.emit("deleteproduct", res);
     });
+    socket.on("newproduct", async (pro) => {
+      let body = pro;
+      let res = await FETCHINGS(
+        "http://localhost:8080/api/products",
+        body,
+        VERBS_HTTP.POST
+      );
+      socket.emit("newproduct", res.data);
+    });
   });
 };

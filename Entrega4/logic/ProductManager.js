@@ -44,16 +44,19 @@ export default class ProductManager {
     let bool;
     await this.getProduct();
     this.modeproduct ? (bool = this.ValidationProduct(product)) : (bool = true);
+    console.log(product);
     if (bool) {
       if (
         !this.products.some((pro) => pro.code === product.code) ||
         this.modeproduct == false
       ) {
         let index = this.products.length - 1;
+        console.log(index);
         product = {
           ...product,
           id: this.products[index].id + 1,
         };
+        console.log(product);
         this.products.push(product);
         this.writeFile(this.products);
         msg = [product, STATUS_TYPES.INFO];

@@ -3,7 +3,7 @@ import { VERBS_HTTP } from "./utils.js";
 
 export const SocketIo = (io) => {
   io.on("connection", (socket) => {
-    console.log("Cliente connected");
+    console.log("Client connected");
     socket.on("deleteproduct", async (id) => {
       let res = await FETCHINGS(
         "http://localhost:8080/api/products/",

@@ -15,7 +15,8 @@ export const POST_SOCKET_EMIT_PRODUCT = (res) => {
 };
 
 export const POST_SOCKET_ON_PRODUCT = (divlist) => {
-  socket.on("newproduct", (res) => {
-    divlist.innerHTML += `<li>${JSON.stringify(res)}</li>`;
+  socket.on("product", (res) => {
+    if (typeof res[0] != "string")
+      divlist.innerHTML += `<li>${JSON.stringify(res[0])}</li>`;
   });
 };

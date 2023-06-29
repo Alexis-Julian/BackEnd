@@ -1,6 +1,8 @@
 import app from "./app.js";
 import middlewares from "./middlewares.js";
-import handlebars from "express-handlebars";
+import expressHandlebars from "express-handlebars";
+import Handlebars from "handlebars";
+import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import config from "./config.js";
 import http from "http";
 import { PORT } from "./config.js";
@@ -11,7 +13,12 @@ import chalk from "chalk";
 const httpserver = http.createServer(app);
 
 /* Engine Template */
-app.engine("handlebars", handlebars.engine());
+app.engine(
+  "handlebars",
+  expressHandlebars.engine({
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+  })
+);
 
 /* MiddleWares */
 middlewares(app);

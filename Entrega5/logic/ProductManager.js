@@ -38,6 +38,7 @@ export default class ProductManager {
     return bool;
   }
   ValidationQuery({ limit, page, query, sort }) {
+    console.log(limit, page, query, sort);
     const sortt = sort ? Object.fromEntries([[sort, -1]]) : undefined;
     const category = query
       ? Object.fromEntries([["category", query]])
@@ -47,6 +48,7 @@ export default class ProductManager {
       limit: limit > 0 ? limit : 10,
       page: page > 0 ? page : 1,
       sort: sortt,
+      select: "-__v",
     };
     return [category, filters];
   }
@@ -55,7 +57,9 @@ export default class ProductManager {
     let product = ["", ""];
     const filter = this.ValidationQuery(querys);
     try {
-      this.products = await productModel.paginate(filter[0], filter[1]);
+      this.products = await productModel.paginate(filter[0], filter[1], {
+        select: "-__v",
+      });
       product = [this.products, STATUS_TYPES.INFO];
     } catch (e) {
       console.log(e);

@@ -1,19 +1,15 @@
 import express from "express";
 import ProductManager from "../../logic/ProductManager.js";
 import { FormatingRender } from "../../utils.js";
-import { file } from "../../config.js";
-import path from "path";
-import { SocketIo } from "../../sockets.js";
 export const app = express.Router();
 
-const ProductManagerI = new ProductManager(
-  path.join(file, "data", "products.json")
-);
+const ProductManagerI = new ProductManager();
 
 app.get("/", async (req, res) => {
-  let [product] = await ProductManagerI.getProduct();
-  product = FormatingRender(product);
-  res.render("home", { product });
+  let [product] = await ProductManagerI.getProduct(req.query);
+  /* let producpars = FormatingRender(product.docs); */
+  let producpars = product.docs;
+  res.render("home", { producpars });
 });
 
 app.get("/realtimeproducts", async (req, res) => {

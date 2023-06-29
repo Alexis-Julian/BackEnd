@@ -69,6 +69,7 @@ export const STATUS_RES_GET = (product, res) => {
 };
 
 export function FormatingRender(eformater) {
+  console.log(eformater);
   let array = eformater.map((e) => JSON.stringify(e));
   return array;
 }

@@ -99,7 +99,7 @@ export default class CartManager {
       const updatedCart = await cartModel
         .findOneAndUpdate(
           { _id: idCart },
-          [this.updateProductInCart(product.id, method, quantity)],
+          [this.updateProductInCart(product._id, method, quantity)],
           {
             new: true,
           }

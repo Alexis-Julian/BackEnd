@@ -59,11 +59,16 @@ export default class CartManager {
   }
 
   addNewProduct(productId) {
-    return { $concatArrays: ["$products", [{ _id: productId, quantity: 1 }]] };
+    return {
+      $concatArrays: ["$products", [{ product: productId, quantity: 1 }]],
+    };
   }
 
   async getCart(cid) {
-    const cart = await cartModel.find({ _id: cid });
+    console.log(cid);
+    const cart = await cartModel
+      .findOne({ _id: cid })
+      .populate("products.product");
     console.log(cart);
   }
 
@@ -94,7 +99,7 @@ export default class CartManager {
       const updatedCart = await cartModel
         .findOneAndUpdate(
           { _id: idCart },
-          [this.updateProductInCart(product._id, method, quantity)],
+          [this.updateProductInCart(product.id, method, quantity)],
           {
             new: true,
           }

@@ -9,4 +9,6 @@ export default (app) => {
   app.set("view engine", "handlebars");
 };
 
+export const TOKEN = "hola";
+
 export const PORT = 8080;

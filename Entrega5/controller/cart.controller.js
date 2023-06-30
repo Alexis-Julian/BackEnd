@@ -1,4 +1,4 @@
-import CartManager from "../logic/CartManager.js";
+import CartManager from "../logic/cart_manager.js";
 import { STATUS_RES_GET } from "../utils.js";
 /* Instanciado de clase manipulacion de productos */
 const CartManagerI = new CartManager();

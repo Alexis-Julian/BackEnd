@@ -1,24 +1,9 @@
 import express from "express";
-import ProductManager from "../../logic/ProductManager.js";
-import { FormatingRender } from "../../utils.js";
+import { getProducts } from "../../controller/view_product.controller.js";
 export const app = express.Router();
 
-const ProductManagerI = new ProductManager();
+/* Visualiza todo los productos */
+app.get("/", getProducts);
 
-app.get("/", async (req, res) => {
-  let [product] = await ProductManagerI.getProduct(req.query);
-  /* let producpars = FormatingRender(product.docs); */
-  let producpars = product.docs;
-  res.render("home", { producpars });
-});
-
-app.get("/realtimeproducts", async (req, res) => {
-  let [product] = await ProductManagerI.getProduct();
-  product = FormatingRender(product);
-  res.render("realtimeproducts", { product });
-});
-
-app.get("/:cid", async (req, res) => {
-  let { cid } = req.params;
-  res.send("123");
-});
+/* Visualiza todo los productos en tiempo real */
+app.get("/realtimeproducts", getProducts);

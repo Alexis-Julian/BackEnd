@@ -1,5 +1,5 @@
 import express from "express";
-import CartManager from "../../logic/CartManager.js";
+import CartManager from "../../logic/cart_manager.js";
 export const app = express.Router();
 
 const CartManagerI = new CartManager();

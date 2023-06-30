@@ -1,4 +1,4 @@
-import ProductManager from "../logic/ProductManager.js";
+import ProductManager from "../logic/product_manager.js";
 import { STATUS_RES_GET } from "../utils.js";
 import { io } from "../index.js";
 

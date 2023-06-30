@@ -62,7 +62,6 @@ export default class ProductManager {
       });
       product = [this.products, STATUS_TYPES.INFO];
     } catch (e) {
-      console.log(e);
       product = [e, STATUS_TYPES.ERROR];
     }
     return product;

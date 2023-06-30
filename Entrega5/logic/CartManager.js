@@ -92,13 +92,14 @@ export default class CartManager {
     try {
       const clearCart = await cartModel
         .findOneAndUpdate({ _id: cid }, [{ $set: { products: [] } }])
-        .catch((e) => {
+        .catch((err) => {
           throw new Error("Cart not found");
         });
       msg = ["Products deleted successfully", STATUS_TYPES.INFO];
     } catch (err) {
       msg = [`Error: ${err.message}`, STATUS_TYPES.WARNING];
     }
+    return msg;
   }
   async addProductCart(idCart, idPro, method, quantity) {
     let msg;

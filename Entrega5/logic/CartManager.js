@@ -6,11 +6,12 @@ export default class CartManager {
     this.cart = [];
   }
   updateProductInCart(productId, method, quantity) {
+    console.log(productId);
     return {
       $set: {
         products: {
           $cond: {
-            if: { $in: [productId, "$products._id"] },
+            if: { $in: [productId, "$products.product"] },
             then: this.updateExistingProduct(productId, method, quantity),
             else: this.addNewProduct(productId),
           },
@@ -38,6 +39,7 @@ export default class CartManager {
     };
   }
   updateExistingProduct(productId, method, quantity) {
+    console.log("HELLOUDA");
     let methods = {
       ADD: () => this.updateAddQuantity(),
       SUBB: () => this.updateSubstractQuantity(),
@@ -49,7 +51,7 @@ export default class CartManager {
         as: "item",
         in: {
           $cond: {
-            if: { $eq: ["$$item._id", productId] },
+            if: { $eq: ["$$item.product", productId] },
             then: methods[method](),
             else: "$$item",
           },
@@ -65,11 +67,10 @@ export default class CartManager {
   }
 
   async getCart(cid) {
-    console.log(cid);
     const cart = await cartModel
       .findOne({ _id: cid })
       .populate("products.product");
-    console.log(cart);
+    return [cart, STATUS_TYPES.INFO];
   }
 
   async addCart() {

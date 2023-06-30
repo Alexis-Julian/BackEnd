@@ -15,8 +15,8 @@ const ProductManagerI = new ProductManager(
 
 app.get("/:cid", async (req, res) => {
   let msg = await CartManagerI.getCart(req.params.cid);
+  STATUS_RES_GET(msg, res);
   /* STATUS_RES_GET(msg, res); */
-  res.send("123");
 });
 
 app.post("/", async (req, res) => {

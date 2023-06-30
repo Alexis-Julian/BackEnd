@@ -13,6 +13,8 @@ export const VERBS_HTTP = Object.freeze({
   DELETE: Symbol(),
 });
 
+export const config_cookie = {};
+
 export const FETCHINGS = async (url, params, method) => {
   let res;
   if (method === VERBS_HTTP.GET) {

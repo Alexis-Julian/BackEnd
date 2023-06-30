@@ -6,7 +6,6 @@ export default class CartManager {
     this.cart = [];
   }
   updateProductInCart(productId, method, quantity) {
-    console.log(productId);
     return {
       $set: {
         products: {
@@ -39,7 +38,6 @@ export default class CartManager {
     };
   }
   updateExistingProduct(productId, method, quantity) {
-    console.log("HELLOUDA");
     let methods = {
       ADD: () => this.updateAddQuantity(),
       SUBB: () => this.updateSubstractQuantity(),
@@ -81,15 +79,20 @@ export default class CartManager {
   }
 
   async clearProductsCart(cid) {
+    let msg;
     try {
-      const clearCart = await cartModel.findOneAndUpdate({ _id: cid }, [
-        { $set: { products: [] } },
-      ]);
+      const clearCart = await cartModel
+        .findOneAndUpdate({ _id: cid }, [{ $set: { products: [] } }])
+        .catch((e) => {
+          throw new Error("Cart not found");
+        });
+      msg = ["Products deleted successfully", STATUS_TYPES.INFO];
     } catch (err) {
-      console.log("Error", err);
+      msg = [`Error: ${err.message}`, STATUS_TYPES.WARNING];
     }
   }
   async addProductCart(idCart, idPro, method, quantity) {
+    let msg;
     try {
       const product = await productModel
         .findOne({ _id: idPro })
@@ -97,6 +100,7 @@ export default class CartManager {
         .catch((e) => {
           throw new Error("Product not found");
         });
+
       const updatedCart = await cartModel
         .findOneAndUpdate(
           { _id: idCart },
@@ -108,9 +112,10 @@ export default class CartManager {
         .catch((e) => {
           throw new Error("Cart not found");
         });
-      console.log(updatedCart);
+      msg = ["Product added successfully", STATUS_TYPES.INFO];
     } catch (error) {
-      console.log("Error:", error.message);
+      msg = [`Error:, ${error.message}`, STATUS_TYPES.WARNING];
     }
+    return msg;
   }
 }

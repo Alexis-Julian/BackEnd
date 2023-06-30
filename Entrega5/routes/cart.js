@@ -16,7 +16,6 @@ const ProductManagerI = new ProductManager(
 app.get("/:cid", async (req, res) => {
   let msg = await CartManagerI.getCart(req.params.cid);
   STATUS_RES_GET(msg, res);
-  /* STATUS_RES_GET(msg, res); */
 });
 
 app.post("/", async (req, res) => {
@@ -27,8 +26,7 @@ app.post("/", async (req, res) => {
 app.post("/:cid/product/:pid", async (req, res) => {
   const { cid, pid } = req.params;
   const msg = await CartManagerI.addProductCart(cid, pid, "ADD");
-  res.send("123");
-  /*  STATUS_RES_GET("msg", res); */
+  STATUS_RES_GET(msg, res);
 });
 
 app.put("/:cid", async (req, res) => {

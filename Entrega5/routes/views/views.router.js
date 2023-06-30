@@ -17,3 +17,8 @@ app.get("/realtimeproducts", async (req, res) => {
   product = FormatingRender(product);
   res.render("realtimeproducts", { product });
 });
+
+app.get("/:cid", async (req, res) => {
+  let { cid } = req.params;
+  res.send("123");
+});

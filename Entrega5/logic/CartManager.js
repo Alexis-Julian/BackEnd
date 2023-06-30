@@ -65,10 +65,19 @@ export default class CartManager {
   }
 
   async getCart(cid) {
-    const cart = await cartModel
-      .findOne({ _id: cid })
-      .populate("products.product");
-    return [cart, STATUS_TYPES.INFO];
+    let data;
+    try {
+      const cart = await cartModel
+        .findOne({ _id: cid })
+        .populate("products.product", "-__v")
+        .catch((e) => {
+          throw new Error("Cart not found");
+        });
+      data = [cart, STATUS_TYPES.INFO];
+    } catch (e) {
+      data = [e.message, STATUS_TYPES.ERROR];
+    }
+    return data;
   }
 
   async addCart() {

@@ -15,7 +15,7 @@ export const SocketIo = (io) => {
     });
     socket.on("newproduct", async (pro) => {
       let body = pro;
-      let res = await FETCHINGS(
+      await FETCHINGS(
         "http://localhost:8080/api/products",
         body,
         VERBS_HTTP.POST

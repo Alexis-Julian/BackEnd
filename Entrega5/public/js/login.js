@@ -13,7 +13,7 @@ form.addEventListener("submit", (e) => {
   });
   json.then((res) => {
     if (res.status == "SUCCESS") {
-      window.location.href = "http://localhost:8080/view/user/product";
+      window.location.href = "http://localhost:8080/view/products";
     }
   });
 });

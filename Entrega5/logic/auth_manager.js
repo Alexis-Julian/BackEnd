@@ -9,25 +9,36 @@ export default class AuthManager {
   async passHash(password, passwordb) {
     return await bcrypt.compare(password, passwordb);
   }
-  async userFound(email) {
-    let userFound = await userModel.findOne({ email: email });
+  /* Payload {email:email} */
+  async userFound(payload) {
+    let userFound;
+    try {
+      userFound = await userModel.findOne(payload).catch((e) => {
+        throw new Error("User not found");
+      });
+    } catch (e) {
+      console.log(`Error:${e}`);
+    }
     return userFound;
   }
   async loginUser({ email, password }, callback) {
     /* Validacion email */
-    let user = await this.userFound(email);
+
+    let user = await this.userFound({ email: email });
     if (!user) return ["User not found", STATUS_TYPES.WARNING];
     /* Validacion contraseña */
     let passhash = await this.passHash(password, user.password);
     if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
+
     /* Creacion de token */
     let token = await createToken({ id: user._id });
     callback(token);
     return [token, STATUS_TYPES.INFO];
   }
-  async addUser({ email, password, username }, callback) {
+  async addUser({ email, password, username, role }, callback) {
     /* Verificacion si el user existe */
-    const userFound = await this.userFound(email);
+    /* --- */
+    const userFound = await this.userFound({ email: email });
     if (!!userFound) return ["User already exists", STATUS_TYPES.WARNING];
     /* Encriptado de la contraseña */
     let passencrypt = await this.Encrypt(password);
@@ -36,8 +47,10 @@ export default class AuthManager {
       email,
       username,
       password: passencrypt,
+      role,
     });
     await newUser.save();
+    console.log(newUser);
     /* Creacion del token */
     let token = await createToken({ id: newUser._id });
     callback(token);

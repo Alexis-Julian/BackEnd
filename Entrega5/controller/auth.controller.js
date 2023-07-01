@@ -23,5 +23,5 @@ export async function AuthLogout(req, res) {
 export async function AuthProfile(req, res) {
   let { id } = req.token;
   const user = await userModel.findOne({ _id: id }).select("-password");
-  res.render("profile", { user });
+  res.render("home", { user });
 }

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="productos" id="divlist" style="color:white;">
+    {{#each product}}<li>{{this}}</li>{{/each}}
+  </div>
+  <div class="formulario">
+    <form action="submit" id="formsubmit">
+      <div>
+        <input type="text" placeholder="Agregar Elementos" id="add" />
+      </div>
+      <div>
+        <input type="text" placeholder="Eliminar Elementos" id="delete" />
+      </div>
+    </form>
+  </div>
+</div>
+<style>
+  * { font-family: "Pangolin", cursive; } body { height: 100vh; width: 100vw;
+  margin: 0; } li { list-style: none; font-size: 1.2em; padding: 5px;
+  text-align: center;margin-bottom: 5px;} .container { height: 100%; width:
+  100%; background-color: black; display: flex; align-items: flex-start; }
+  .productos {display: flex; flex-direction: column; color: white; flex-grow: 1;
+  height: 100%; justify-content: center; } .formulario { flex-grow: 1; height:
+  100%; } form { height: 100%; width: 100%; display: flex; flex-direction:
+  column; justify-content: space-around; overflow: hidden; } input { font-size:
+  1.5em; }input:focus { outline: none; }
+</style>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js" type="module" defer></script>

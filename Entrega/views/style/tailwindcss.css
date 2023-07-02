@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Quicksand", sans-serif;
+  }
+}
+
+@layer components {
+  .btn_m {
+    @apply bg-neutral-100  hover:bg-gray-100 text-neutral-600  font-semibold py-2 px-4 border border-gray-400 rounded shadow;
+  }
+}

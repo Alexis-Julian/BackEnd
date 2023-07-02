@@ -1,0 +1,18 @@
+<div class="flex flex-col  h-full bg-zinc-700	">
+  <div class="grid grid-cols-2 bg-blue-950  overflow-hidden h-1/5">
+    {{>_carduser}}
+    <div class="flex flex-col items-end justify-around h-full pr-2">
+      <button class="btn_m">Siguiente Pagina</butto>
+      <button class="btn_m">Salir</butto>
+    </div>
+  </div>
+  <div class="flex  w-full " >
+  <form class="flex items-center justify-center  flex-wrap  gap-3 p-4 bg-slate-950 w-full h-full">
+      {{#each producpars}}
+        {{>_card}}
+      {{/each}}
+  </form>
+  </div>
+</div>
+
+<script src="/js/home_view.js" defer></script>

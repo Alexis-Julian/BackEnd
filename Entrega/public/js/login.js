@@ -12,6 +12,7 @@ form.addEventListener("submit", (e) => {
     return response.json();
   });
   json.then((res) => {
+    console.log(res);
     if (res.status == "SUCCESS") {
       window.location.href = "http://localhost:8080/view/products";
     }

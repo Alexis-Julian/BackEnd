@@ -1,5 +1,5 @@
 import getPageQuery from "./utils.js";
-/* const form = document.getElementById("form_submit");
+const form = document.getElementById("form_submit");
 function sendProduct(idp) {
   let cart = prompt("Intgrese el id del carrito");
   const url = `http://localhost:8080/api/carts/${cart}/product/${idp}`;
@@ -9,7 +9,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   let idp = e.submitter.name;
   sendProduct(idp);
-}); */
+});
 
 /* Siguiente pagina de productos */
 const next_page = document.getElementById("next_page");

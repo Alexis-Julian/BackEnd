@@ -5,7 +5,7 @@ const AuthManagerI = new AuthManager();
 export const connectMongoDb = async () => {
   try {
     await mongoose.connect(
-      "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1"
+      "mongodb+srv://Buzzar:ywSH2yEkcHVkUo42@cluster0.031b0cm.mongodb.net/?retryWrites=true&w=majority"
     );
     console.log(chalk.blue("Connected to MongoDB"));
   } catch (error) {

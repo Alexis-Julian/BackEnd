@@ -47,7 +47,7 @@ export default class AuthManager {
       email,
       username,
       password: passencrypt,
-      role,
+      role:"usuario"
     });
     await newUser.save();
     console.log(newUser);

@@ -5,6 +5,8 @@ import { app as AuthUser } from "./routes/api/auth.routes.js";
 import { app as RouteProductView } from "./routes/views/product_views.routes.js";
 import { app as RouteCartView } from "./routes/views/cart_views.routes.js";
 import { app as AuthView } from "./routes/views/auth_views.routes.js";
+import {app as  RouteSession} from "./routes/api/session.routes.js"
+import passport from "passport";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import morgan from "morgan";
@@ -15,7 +17,9 @@ export default (app) => {
   app.use(express.json());
   app.use(cookieParser());
   app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
+  app.use(passport.initialize())
   app.use("/api/user", AuthUser);
+  app.use("/api/sessions",RouteSession)
   app.use("/api/products", RouteProduct);
   app.use("/api/carts", RouteCart);
   app.use("/view/products", RouteProductView);

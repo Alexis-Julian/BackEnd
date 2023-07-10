@@ -11,4 +11,8 @@ export default (app) => {
 
 export const TOKEN = "hola";
 
+export const GITHUB_CLIENT_ID = ""
+
+export const GITHUB_CLIENT_SECRET= ""
+
 export const PORT = 8080;

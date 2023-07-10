@@ -26,3 +26,9 @@ form.addEventListener("submit", (e) => {
     alert("Nazhe");
   }
 });
+
+
+const btn_github = document.getElementById("github")
+
+btn_github.addEventListener("click",(e)=>{
+})

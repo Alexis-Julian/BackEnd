@@ -18,3 +18,4 @@ app.post("/register", AuthRegister);
 app.post("/logout", AuthLogout);
 
 app.get("/profile", authRequired, AuthProfile);
+

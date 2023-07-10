@@ -2,6 +2,7 @@ import app from "./app.js";
 import middlewares from "./middlewares.js";
 import expressHandlebars from "express-handlebars";
 import Handlebars from "handlebars";
+import initializePassport from "./config/passport.config.js";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import config from "./config.js";
 import http from "http";
@@ -19,6 +20,9 @@ app.engine(
     handlebars: allowInsecurePrototypeAccess(Handlebars),
   })
 );
+
+/* ConfigPassport */
+initializePassport()
 
 /* MiddleWares */
 middlewares(app);

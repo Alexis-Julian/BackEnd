@@ -5,6 +5,7 @@
 @layer base {
   html {
     font-family: "Quicksand", sans-serif;
+    font-size: 0.9rem;
   }
 }
 

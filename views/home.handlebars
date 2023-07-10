@@ -1,13 +1,9 @@
-<div class="flex flex-col  h-full bg-zinc-700	">
-  <div class="grid grid-cols-2 bg-blue-950  overflow-hidden h-1/5">
+<div class="flex flex-col  h-full bg-zinc-700 overflow-hidden">
+  <div class="">
     {{>_carduser}}
-    <div class="flex flex-col items-end justify-around h-full pr-2">
-      <button class="btn_m" id="next_page">Siguiente Pagina</butto>
-      <button class="btn_m" id="logout">Salir</butto>
-    </div>
   </div>
-  <div class="flex  w-full " >
-  <form id="form_submit"  class="flex items-center justify-center  flex-wrap  gap-3 p-4 bg-slate-950 w-full h-full">
+  <div class="flex w-full  h-full" >
+  <form id="form_submit"  class="flex items-center justify-center  flex-wrap  gap-3 p-4 bg-gray-50 dark:bg-gray-900 w-full h-full overflow-y-scroll">
       {{#each producpars}}
         {{>_card}}
       {{/each}}

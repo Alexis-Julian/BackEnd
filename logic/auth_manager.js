@@ -35,19 +35,22 @@ export default class AuthManager {
     callback(token);
     return [token, STATUS_TYPES.INFO];
   }
-  async addUser({ email, password, username, role }, callback) {
+
+  async addUser({ email, password, username }, callback) {
     /* Verificacion si el user existe */
     /* --- */
     const userFound = await this.userFound({ email: email });
+    console.log(userFound);
     if (!!userFound) return ["User already exists", STATUS_TYPES.WARNING];
     /* Encriptado de la contraseña */
     let passencrypt = await this.Encrypt(password);
+    console.log(passencrypt);
     /* Envio a la db */
     let newUser = new userModel({
       email,
       username,
       password: passencrypt,
-      role:"usuario"
+      role: "usuario",
     });
     await newUser.save();
     console.log(newUser);

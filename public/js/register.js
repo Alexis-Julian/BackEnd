@@ -27,8 +27,8 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+const btn_github = document.getElementById("github");
 
-const btn_github = document.getElementById("github")
-
-btn_github.addEventListener("click",(e)=>{
-})
+btn_github.addEventListener("click", (e) => {
+  window.location.href = "/api/sessions/github";
+});

@@ -35,9 +35,11 @@ previous_page.addEventListener("click", (e) => {
   const url = location.href;
   let urlquerys = new URL(url);
   getPageQuery(urlquerys, (numpage) => {
-    urlquerys.searchParams.set("page", numpage - 1);
+    if (numpage > 1) {
+      urlquerys.searchParams.set("page", numpage - 1);
+      window.location.href = urlquerys.href;
+    }
   });
-  window.location.href = urlquerys.href;
 });
 
 /* Logout */

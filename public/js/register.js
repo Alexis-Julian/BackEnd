@@ -3,11 +3,13 @@ const form = document.getElementById("form");
 /* Provisorio  */
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let [email, confirmpassword, password] = e.target;
+  let [email, username, password, confirmpassword] = e.target;
+  console.log(password.value, confirmpassword.value);
   let pass = ConfirmPassword(confirmpassword, password);
   let register = {
     email: email.value,
     password: password.value,
+    username: username.value,
   };
   if (pass) {
     let json = fetch("http://localhost:8080/api/user/register", {
@@ -19,7 +21,7 @@ form.addEventListener("submit", (e) => {
     });
     json.then((res) => {
       if (res.status == "SUCCESS") {
-        window.location.href = "http://localhost:8080/view/user/product";
+        window.location.href = "http://localhost:8080/view/products";
       }
     });
   } else {

@@ -5,14 +5,12 @@ import {
   AuthRegister,
   AuthLogout,
 } from "../../controller/auth.controller.js";
-import { ValidateisAdmin } from "../../middlewares/validateAdmin.js";
-
 import {} from "../../controller/product.controller.js";
 import { authRequired } from "../../middlewares/validateToken.js";
 
 export const app = express();
 
-app.post("/login", ValidateisAdmin, AuthLogin);
+app.post("/login", AuthLogin);
 
 app.post("/register", AuthRegister);
 

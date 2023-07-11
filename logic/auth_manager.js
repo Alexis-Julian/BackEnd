@@ -24,17 +24,25 @@ export default class AuthManager {
   }
   async loginUser({ email, password }, callback) {
     /* Validacion email */
-    let user = await this.userFound({ email: email });
-    if (!user) return ["User not found", STATUS_TYPES.WARNING];
+    try {
+      if (email == userAdmin.email) throw new Error("Is Admin");
 
-    /* Validacion contraseña */
-    let passhash = await this.passHash(password, user.password);
-    if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
+      let user = await this.userFound({ email: email });
+      if (!user) return ["User not found", STATUS_TYPES.WARNING];
 
-    /* Creacion de token */
-    let token = await createToken({ id: user._id });
-    callback(token);
-    return [token, STATUS_TYPES.INFO];
+      /* Validacion contraseña */
+      let passhash = await this.passHash(password, user.password);
+      if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
+
+      /* Creacion de token */
+      let token = await createToken({ id: user._id });
+      callback(token);
+      return [token, STATUS_TYPES.INFO];
+    } catch (e) {
+      if (e.message == "Is Admin") {
+        console.log("Es administrador");
+      }
+    }
   }
 
   async addUser({ email, password, username, img }, callback) {

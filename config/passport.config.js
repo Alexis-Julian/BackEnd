@@ -35,8 +35,8 @@ const initializePassport = () => {
             email: profile.email,
             password: "nopass",
             username: profile._json.name || profile._json.login || "noname",
+            img: profile._json.avatar_url,
           };
-
           let validUser = await AuthManagerI.loginUser(profilel, (token) => {
             console.log(token);
           });
@@ -56,7 +56,7 @@ const initializePassport = () => {
   );
   passport.serializeUser((validUser, done) => {
     /* console.log("Serial", validUser); */
-    console.log("por qui");
+    console.log(validUser);
     done(null, validUser);
   });
   passport.deserializeUser(async (id, done) => {

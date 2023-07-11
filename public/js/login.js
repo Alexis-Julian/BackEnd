@@ -20,3 +20,9 @@ form.addEventListener("submit", (e) => {
   let login = { email: email.value, password: password.value };
   fetchData(login);
 });
+
+const btn_github = document.getElementById("github");
+
+btn_github.addEventListener("click", (e) => {
+  window.location.href = "/api/sessions/github";
+});

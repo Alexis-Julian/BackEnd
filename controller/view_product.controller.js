@@ -7,9 +7,16 @@ const AuthManagerI = new AuthManager();
 export async function getProducts(req, res) {
   const { token } = req.cookies;
   let { id } = jwt.verify(token, TOKEN);
-  let { username, role } = await AuthManagerI.userFound({ _id: id });
+  let data = await AuthManagerI.userFound({ _id: id });
+  let user = {
+    username: data.username,
+    email: data.email,
+    role: data.role,
+    img: data.img,
+  };
+  console.log(data);
   let [product] = await ProductManagerI.getProduct(req.query);
   let producpars = product.docs;
 
-  res.render("home", { producpars, username, role });
+  res.render("home", { producpars, user });
 }

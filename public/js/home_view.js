@@ -28,6 +28,18 @@ next_page.addEventListener("click", (e) => {
   window.location.href = urlquerys.href;
 });
 
+const previous_page = document.getElementById("previous_page");
+
+previous_page.addEventListener("click", (e) => {
+  e.preventDefault();
+  const url = location.href;
+  let urlquerys = new URL(url);
+  getPageQuery(urlquerys, (numpage) => {
+    urlquerys.searchParams.set("page", numpage - 1);
+  });
+  window.location.href = urlquerys.href;
+});
+
 /* Logout */
 const logout = document.getElementById("logout");
 logout.addEventListener("click", (e) => {

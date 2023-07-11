@@ -36,7 +36,7 @@ export default class AuthManager {
     return [token, STATUS_TYPES.INFO];
   }
 
-  async addUser({ email, password, username }, callback) {
+  async addUser({ email, password, username, img }, callback) {
     /* Verificacion si el user existe */
     /* --- */
     const userFound = await this.userFound({ email: email });
@@ -51,6 +51,7 @@ export default class AuthManager {
       username,
       password: passencrypt,
       role: "usuario",
+      img: img,
     });
     await newUser.save();
     console.log(newUser);

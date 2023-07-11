@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import userModel from "../models/user.model.js";
 import { createToken } from "../libs/jwt.js";
 import { STATUS_TYPES } from "../utils.js";
+import { userAdmin } from "../config.js";
 export default class AuthManager {
   async Encrypt(password) {
     return await bcrypt.hash(password, 10);
@@ -23,9 +24,9 @@ export default class AuthManager {
   }
   async loginUser({ email, password }, callback) {
     /* Validacion email */
-
     let user = await this.userFound({ email: email });
     if (!user) return ["User not found", STATUS_TYPES.WARNING];
+
     /* Validacion contraseña */
     let passhash = await this.passHash(password, user.password);
     if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];

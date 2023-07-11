@@ -40,7 +40,10 @@ export default class AuthManager {
       return [token, STATUS_TYPES.INFO];
     } catch (e) {
       if (e.message == "Is Admin") {
-        console.log("Es administrador");
+        let id = "admin"
+        let token = await createToken({id:id})
+        callback(token)
+        return [token,STATUS_TYPES.INFO]
       }
     }
   }

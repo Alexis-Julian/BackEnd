@@ -1,10 +1,11 @@
 import { ConfirmPassword } from "/js/utils.js";
 const form = document.getElementById("form");
+const reload = document.getElementById("charge");
 /* Provisorio  */
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  reload.classList.add("animate-spin");
   let [email, username, password, confirmpassword] = e.target;
-  console.log(password.value, confirmpassword.value);
   let pass = ConfirmPassword(confirmpassword, password);
   let register = {
     email: email.value,
@@ -27,10 +28,28 @@ form.addEventListener("submit", (e) => {
   } else {
     alert("Nazhe");
   }
+  reload.classList.remove("animate-spin");
 });
 
+/* btn Login GitHub */
 const btn_github = document.getElementById("github");
 
 btn_github.addEventListener("click", (e) => {
+  reload.classList.add("animate-spin");
   window.location.href = "/api/sessions/github";
+});
+
+/* Show password */
+const checkbox = document.getElementById("checked");
+const img_pass = document.getElementById("imgpass");
+const confirmpassword = document.getElementById("confirm-password");
+
+checkbox.addEventListener("click", (e) => {
+  if (checkbox.checked) {
+    img_pass.src = "/svg/eyeopen.svg";
+    confirmpassword.type = "text";
+  } else {
+    img_pass.src = "/svg/eyeclose.svg";
+    confirmpassword.type = "password";
+  }
 });

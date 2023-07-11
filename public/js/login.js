@@ -1,4 +1,5 @@
 const form = document.getElementById("form");
+const reload = document.getElementById("charge");
 /* Provisorio  */
 const fetchData = async (login) => {
   let response = await fetch("http://localhost:8080/api/user/login", {
@@ -12,10 +13,12 @@ const fetchData = async (login) => {
   } else {
     alert(data.data);
   }
+  reload.classList.remove("animate-spin");
 };
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  reload.classList.add("animate-spin");
   let [email, password] = e.target;
   let login = { email: email.value, password: password.value };
   fetchData(login);
@@ -24,5 +27,6 @@ form.addEventListener("submit", (e) => {
 const btn_github = document.getElementById("github");
 
 btn_github.addEventListener("click", (e) => {
+  reload.classList.add("animate-spin");
   window.location.href = "/api/sessions/github";
 });

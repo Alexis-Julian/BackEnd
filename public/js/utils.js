@@ -11,13 +11,47 @@ export const ConfirmPassword = (password, confpass) => {
   return password.value == confpass.value;
 };
 
-/* export const Fetch = async (url) => {
-  let url = url;
-  let data = await fetch(url, {
-    method: verb,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(register),
-  });
-  let json = await data.json();
-  return json;
-}; */
+export class Alert {
+  Warning(txt) {
+    Toastify({
+      text: txt,
+      duration: 1500,
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "center",
+      stopOnFocus: true,
+      style: {
+        background: "yellow",
+      },
+    }).showToast();
+  }
+  Success(txt) {
+    Toastify({
+      text: txt,
+      duration: 1500,
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "center",
+      stopOnFocus: true,
+      style: {
+        background: "green",
+      },
+    }).showToast();
+  }
+  Error(txt) {
+    Toastify({
+      text: txt,
+      duration: 1500,
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "center",
+      stopOnFocus: true,
+      style: {
+        background: "red",
+      },
+    }).showToast();
+  }
+}

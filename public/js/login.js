@@ -1,6 +1,9 @@
 const form = document.getElementById("form");
 const reload = document.getElementById("charge");
+import { Alert } from "./utils.js";
 /* Provisorio  */
+const IAlert = new Alert();
+
 const fetchData = async (login) => {
   try {
     let response = await fetch("http://localhost:8080/api/user/login", {
@@ -12,7 +15,7 @@ const fetchData = async (login) => {
     if (data.status === "SUCCESS") {
       window.location.href = "http://localhost:8080/view/products";
     } else {
-      alert(data.data);
+      IAlert.Error("User not found");
     }
   } catch (e) {
     console.log("Error:" + e.message);

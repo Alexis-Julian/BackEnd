@@ -1,8 +1,12 @@
 import { ConfirmPassword } from "/js/utils.js";
+import { Alert } from "./utils.js";
 const form = document.getElementById("form");
 const reload = document.getElementById("charge");
+
+const IAlert = new Alert();
+
 /* Provisorio  */
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   reload.classList.add("animate-spin");
   let [email, username, password, confirmpassword] = e.target;
@@ -13,20 +17,20 @@ form.addEventListener("submit", (e) => {
     username: username.value,
   };
   if (pass) {
-    let json = fetch("http://localhost:8080/api/user/register", {
+    let response = await fetch("http://localhost:8080/api/user/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(register),
-    }).then((response) => {
-      return response.json();
     });
-    json.then((res) => {
-      if (res.status == "SUCCESS") {
-        window.location.href = "http://localhost:8080/view/products";
-      }
-    });
+
+    let json = await response.json();
+
+    if (json.status === "SUCCES")
+      return (window.location.href = "http://localhost:8080/view/products");
+
+    IAlert.Error("Account already exists");
   } else {
-    alert("Nazhe");
+    alert("-_-");
   }
   reload.classList.remove("animate-spin");
 });

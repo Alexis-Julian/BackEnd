@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import ObjectId from "bson-objectid"
 
 export const STATUS_TYPES = Object.freeze({
   ERROR: Symbol(),
@@ -74,4 +75,8 @@ export function FormatingRender(eformater) {
   console.log(eformater);
   let array = eformater.map((e) => JSON.stringify(e));
   return array;
+}
+
+export function IsIdValid(id){
+  return ObjectId.isValid(id)
 }

@@ -33,7 +33,7 @@ export default class AuthManager {
       /* Validacion contraseña */
       let passhash = await this.passHash(password, user.password);
       if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
-
+      
       /* Creacion de token */
       let token = await createToken({ id: user._id });
       callback(token);

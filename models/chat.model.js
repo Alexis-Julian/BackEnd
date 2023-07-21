@@ -5,8 +5,18 @@ let collection = "chats";
 const ChatSchema = new mongoose.Schema(
   {
     chat: {
-      users: { type: [] },
-      chats: { type: [] },
+      chats: {
+        type: [
+          {
+            sender: {
+              type: String,
+              required: true,
+            },
+            recipient: { type: String, required: true },
+            body: { type: String, required: true },
+          },
+        ],
+      },
     },
   },
   { versionKey: false }

@@ -8,7 +8,7 @@ import {
   DeleteOneQuantity,
 } from "../../controller/cart.controller.js";
 
-export const app = express();
+export const app = express.Router();
 
 /* Devuelve el carrito especificado */
 app.get("/:cid", getCart);

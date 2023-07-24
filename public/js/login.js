@@ -12,6 +12,7 @@ const fetchData = async (login) => {
       body: JSON.stringify(login),
     });
     let data = await response.json();
+
     if (data.status === "SUCCESS") {
       window.location.href = "http://localhost:8080/view/products";
     } else {

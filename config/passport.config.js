@@ -38,12 +38,12 @@ const initializePassport = () => {
             img: profile._json.avatar_url,
           };
           let validUser = await AuthManagerI.loginUser(profilel, (token) => {
-            console.log(token);
+            /* console.log(token); */
           });
           if (STATUS_TYPES.INFO === validUser[1]) return done(null, validUser);
 
           let regiUser = await AuthManagerI.addUser(profilel, (token) => {
-            console.log(token);
+            /* console.log(token); */
           });
           return done(null, regiUser);
         } catch (e) {
@@ -56,7 +56,7 @@ const initializePassport = () => {
   );
   passport.serializeUser((validUser, done) => {
     /* console.log("Serial", validUser); */
-    console.log(validUser);
+    /* console.log(validUser); */
     done(null, validUser);
   });
   passport.deserializeUser(async (id, done) => {

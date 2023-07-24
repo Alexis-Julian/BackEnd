@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import ObjectId from "bson-objectid"
+import ObjectId from "bson-objectid";
 
 export const STATUS_TYPES = Object.freeze({
   ERROR: Symbol(),
@@ -13,8 +13,6 @@ export const VERBS_HTTP = Object.freeze({
   PUT: Symbol(),
   DELETE: Symbol(),
 });
-
-export const config_cookie = {};
 
 export const FETCHINGS = async (url, params, method) => {
   let res;
@@ -72,11 +70,10 @@ export const STATUS_RES_GET = (product, res) => {
 };
 
 export function FormatingRender(eformater) {
-  console.log(eformater);
   let array = eformater.map((e) => JSON.stringify(e));
   return array;
 }
 
-export function IsIdValid(id){
-  return ObjectId.isValid(id)
+export function IsIdValid(id) {
+  return ObjectId.isValid(id);
 }

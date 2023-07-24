@@ -6,7 +6,7 @@ import {
   UpdateProduct,
   Removeproduct,
 } from "../../controller/product.controller.js";
-export const app = express();
+export const app = express.Router();
 
 /* Trae los productos sus querys son 
     limit: "Number" , page: "Number", 

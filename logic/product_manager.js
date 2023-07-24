@@ -38,7 +38,6 @@ export default class ProductManager {
     return bool;
   }
   ValidationQuery({ limit, page, query, sort }) {
-    console.log(limit, page, query, sort);
     const sortt = sort ? Object.fromEntries([[sort, -1]]) : undefined;
     const category = query
       ? Object.fromEntries([["category", query]])

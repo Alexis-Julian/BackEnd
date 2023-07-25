@@ -1,17 +1,12 @@
 import express from "express";
-import { PostMsg } from "../../controller/chat.controller.js";
+import { PostMsg, CreateChat } from "../../controller/chat.controller.js";
 import chatModel from "../../models/chat.model.js";
+import userModel from "../../models/user.model.js";
 export const app = express.Router();
 
-app.post("/createchat",(req,res)=>{
-  /* Sin validar que el chat no pueda funcionar */
+app.post("/createchat", CreateChat);
 
-  const chatid = new chatModel()
-
-  res.send(chatid)
-})
-
-app.post("/postmsg", (req,res)=>{
-  const {sender,recipient,body} = req.body;
-  res.send("Nice")
+app.post("/postmsg", (req, res) => {
+  const { sender, recipient, body } = req.body;
+  res.send("Nice");
 });

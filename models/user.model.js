@@ -9,18 +9,22 @@ const userSchema = new mongoose.Schema(
     role: { type: String, required: true },
     img: { type: String },
     chats: {
-      type: [{receiver:{type:String},idchat:{type: mongoose.Schema.Types.ObjectId, ref: "chats"}}],
+      type: [
+        { idchat: { type: mongoose.Schema.Types.ObjectId, ref: "chats" } },
+      ],
       default: [],
     },
-    friends:{
-      type:[
+    friends: {
+      type: [
         {
           friend: {
-            type:mongoose.Schema.Types.ObjectId,
-            ref : "users"}
-          }
-        ],
-            default:[]}
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+          },
+        },
+      ],
+      default: [],
+    },
   },
   { versionKey: false }
 );

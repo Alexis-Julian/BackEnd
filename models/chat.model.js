@@ -4,8 +4,7 @@ let collection = "chats";
 
 const ChatSchema = new mongoose.Schema(
   {
-    chat: {
-      chats: {
+      chat: {
         type: [
           {
             sender: {
@@ -18,7 +17,6 @@ const ChatSchema = new mongoose.Schema(
         ],
       },
     },
-  },
   { versionKey: false }
 );
 export default mongoose.model(collection, ChatSchema);

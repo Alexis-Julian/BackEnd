@@ -1,11 +1,17 @@
 import express from "express";
 import { PostMsg } from "../../controller/chat.controller.js";
-
+import chatModel from "../../models/chat.model.js";
 export const app = express.Router();
 
-app.get("/friend", (req, res) => {
-  const { token } = req.cookies;
-  res.send(token);
-});
+app.post("/createchat",(req,res)=>{
+  /* Sin validar que el chat no pueda funcionar */
 
-app.post("/", PostMsg);
+  const chatid = new chatModel()
+
+  res.send(chatid)
+})
+
+app.post("/postmsg", (req,res)=>{
+  const {sender,recipient,body} = req.body;
+  res.send("Nice")
+});

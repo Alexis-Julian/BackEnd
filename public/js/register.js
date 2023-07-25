@@ -22,7 +22,6 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(register),
     });
-
     let json = await response.json();
     if (json.status === "SUCCESS")
       IAlert.Success("Account Created")

@@ -6,6 +6,6 @@ export async function Chat(req, res) {
     .findById({ _id: usertest })
     .populate("friends.friend")
     .select("-_id");
-  console.log(user.friends);
+  /* console.log(user.friends); */
   res.render("chats", { user });
 }

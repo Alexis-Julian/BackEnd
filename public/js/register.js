@@ -24,8 +24,9 @@ form.addEventListener("submit", async (e) => {
     });
 
     let json = await response.json();
-
-    if (json.status === "SUCCES")
+    console.log(json)
+    if (json.status === "SUCCESS")
+      IAlert.Success("Account Created")
       return (window.location.href = "http://localhost:8080/view/products");
 
     IAlert.Error("Account already exists");

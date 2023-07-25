@@ -7,6 +7,7 @@ import { app as RouteCart } from "./routes/api/cart.routes.js";
 import { app as AuthUser } from "./routes/api/auth.routes.js";
 import { app as RouteChat } from "./routes/api/chat.routes.js";
 import { app as CookieRoute } from "./routes/api/cookie.routes.js";
+import {app as RouteFriend} from "./routes/api/friends.routes.js"
 import { app as RouteProductView } from "./routes/views/product_views.routes.js";
 import { app as RouteCartView } from "./routes/views/cart_views.routes.js";
 import { app as AuthView } from "./routes/views/auth_views.routes.js";
@@ -46,6 +47,7 @@ export default (app) => {
   app.use("/api/chat", RouteChat);
   app.use("/api/products", RouteProduct);
   app.use("/api/carts", RouteCart);
+  app.use("/api/friends",RouteFriend)
   app.use("/api/cookie", CookieRoute);
   app.use("/view/products", RouteProductView);
   app.use("/view/cart", RouteCartView);

@@ -14,15 +14,12 @@ app.get(
   }
 );
 
-app.post("/establecer", (req, res) => {
-  /* const { id } = req.body; */
-  req.session.usuarios = "123";
-  console.log(req.session);
-  /* res.send("nice"); */
+app.get("/establecer", (req, res) => {
+  req.session.usuarios = "64a6db4f692dda855a05b665";
   res.send("Nice");
 });
 
 app.get("/obtener", (req, res) => {
-  console.log(req.session.usuarios);
-  res.send(req.session);
+  console.log(req.session)
+  res.send("Peticion");
 });

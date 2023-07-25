@@ -6,11 +6,7 @@ connectMongoDb();
 
 // Ejemplo de uso
 
-/* const asd = async () => {
-  let a = await userModel.find({});
-  console.log(a);
-};
-asd(); */
+
 const app = express();
 
 export default app;

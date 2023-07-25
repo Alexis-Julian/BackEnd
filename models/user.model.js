@@ -12,7 +12,15 @@ const userSchema = new mongoose.Schema(
       type: [{ type: mongoose.Schema.Types.ObjectId, ref: "chats" }],
       default: [],
     },
-    friends:{type:[{type:mongoose.Schema.Types.ObjectId,ref : "users"}],default:[]}
+    friends:{
+      type:[
+        {
+          friend: {
+            type:mongoose.Schema.Types.ObjectId,
+            ref : "users"}
+          }
+        ],
+            default:[]}
   },
   { versionKey: false }
 );

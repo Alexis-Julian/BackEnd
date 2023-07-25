@@ -1,12 +1,12 @@
 import userModel from "../models/user.model.js"
-const idTest = "64acc93afb43b1871e224c55"
+const idTest = "64bf1070fdcd43c8c6c97681"
 
 
 export default class FriendManager{
     async addFriend(id){
-        let actualizacion = {$push:{friends:id}}
-        let asd= await userModel.findById(idTest,actualizacion)
-        /* console.log(asd) */
+        /* No esta verificado por si el usuario ya esta agendando a su lista de amigo */
+        let aux= await userModel.findOneAndUpdate({_id:idTest},{$push:{friends:{friend:id}}},{new:true}) 
+        
     }
     removeFriend(){
 

@@ -21,4 +21,3 @@ export const userAdmin = {
   password: "adminCod3r123",
   role: "admin",
 };
-export const PORT = 8080;

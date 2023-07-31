@@ -22,7 +22,7 @@ export default class ChatManager {
       { new: true }
     );
 
-    console.log(aux_users_update);
+    await ChatI.save();
   }
 
   async PostMsg() {}

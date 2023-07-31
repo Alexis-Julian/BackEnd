@@ -30,17 +30,17 @@ export default class AuthManager {
 
       let user = await this.userFound({ email: email });
       if (!user) return ["User not found", STATUS_TYPES.WARNING];
-
       /* Validacion contraseña */
+
       let passhash = await this.passHash(password, user.password);
       if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
-
+      console.log("1111");
       /* Creacion de token */
       let token = await createToken({ id: user._id });
-      console.log(token);
       callback(token);
       return [token, STATUS_TYPES.INFO];
     } catch (e) {
+      console.log("Error: " + e.message);
       if (e.message == "Is Admin") {
         let id = "admin";
         let token = await createToken({ id: id });

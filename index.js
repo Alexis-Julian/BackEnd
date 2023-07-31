@@ -6,10 +6,12 @@ import initializePassport from "./config/passport.config.js";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
 import config from "./config.js";
 import http from "http";
-import { PORT } from "./config.js";
 import { SocketIo } from "./sockets.js";
 import { Server as ServerWebSocket } from "socket.io";
 import chalk from "chalk";
+import env from "./config/enviroment.config.js";
+
+import fetch from "node-fetch";
 /* Initialization  Http Server*/
 const httpserver = http.createServer(app);
 
@@ -22,7 +24,7 @@ app.engine(
 );
 
 /* ConfigPassport */
-initializePassport()
+initializePassport();
 
 /* MiddleWares */
 middlewares(app);
@@ -34,5 +36,5 @@ SocketIo(io);
 config(app);
 
 /* Server Listen */
-httpserver.listen(PORT);
-console.log(chalk.blueBright("Server listening on port", +PORT));
+httpserver.listen(env.PORT);
+console.log(chalk.blueBright("Server listening on port", +env.PORT));

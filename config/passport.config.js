@@ -1,4 +1,5 @@
 import passport from "passport";
+/* import jwt from "passpor-jwt"; */
 import GitHubStrategy from "passport-github2";
 import userModel from "../models/user.model.js";
 import fetch from "node-fetch";
@@ -37,8 +38,10 @@ const initializePassport = () => {
             username: profile._json.name || profile._json.login || "noname",
             img: profile._json.avatar_url,
           };
+
           let validUser = await AuthManagerI.loginUser(profilel, (token) => {
-            /* console.log(token); */
+            console.log("123123");
+            console.log(token);
           });
           if (STATUS_TYPES.INFO === validUser[1]) return done(null, validUser);
 

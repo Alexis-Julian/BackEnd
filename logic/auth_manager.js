@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import userModel from "../models/user.model.js";
 import { createToken } from "../libs/jwt.js";
 import { STATUS_TYPES } from "../utils.js";
-import { userAdmin } from "../config.js";
+import env from "../config/enviroment.config.js";
 
 export default class AuthManager {
   async Encrypt(password) {
@@ -14,6 +14,7 @@ export default class AuthManager {
   /* Payload {email:email} */
   async userFound(payload) {
     let userFound;
+
     try {
       userFound = await userModel.findOne(payload).catch((e) => {
         throw new Error("User not found");
@@ -25,8 +26,9 @@ export default class AuthManager {
   }
   async loginUser({ email, password }, callback) {
     /* Validacion email */
+
     try {
-      if (email == userAdmin.email) throw new Error("Is Admin");
+      if (email == env.ADMIN.email) throw new Error("Is Admin");
 
       let user = await this.userFound({ email: email });
       if (!user) return ["User not found", STATUS_TYPES.WARNING];

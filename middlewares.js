@@ -1,13 +1,12 @@
 import express from "express";
-import { connectMongoDb } from "./db.js";
-
+import env from "./config/enviroment.config.js";
 /* --------------Rutas---------------- */
 import { app as RouteProduct } from "./routes/api/product.routes.js";
 import { app as RouteCart } from "./routes/api/cart.routes.js";
 import { app as AuthUser } from "./routes/api/auth.routes.js";
 import { app as RouteChat } from "./routes/api/chat.routes.js";
 import { app as CookieRoute } from "./routes/api/cookie.routes.js";
-import {app as RouteFriend} from "./routes/api/friends.routes.js"
+import { app as RouteFriend } from "./routes/api/friends.routes.js";
 import { app as RouteProductView } from "./routes/views/product_views.routes.js";
 import { app as RouteCartView } from "./routes/views/cart_views.routes.js";
 import { app as AuthView } from "./routes/views/auth_views.routes.js";
@@ -32,11 +31,11 @@ export default (app) => {
   app.use(
     session({
       store: MongoStore.create({
-        mongoUrl:
-          "mongodb+srv://Buzzar:ywSH2yEkcHVkUo42@cluster0.031b0cm.mongodb.net/?retryWrites=true&w=majority",
+        mongoUrl: env.MONGO_URL,
         mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
         ttl: 15,
       }),
+      /* Guardar en un env */
       secret: "asd123",
       resave: false,
       saveUninitialized: false,
@@ -47,7 +46,7 @@ export default (app) => {
   app.use("/api/chat", RouteChat);
   app.use("/api/products", RouteProduct);
   app.use("/api/carts", RouteCart);
-  app.use("/api/friends",RouteFriend)
+  app.use("/api/friends", RouteFriend);
   app.use("/api/cookie", CookieRoute);
   app.use("/view/products", RouteProductView);
   app.use("/view/cart", RouteCartView);

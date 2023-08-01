@@ -2,8 +2,7 @@ import express from "express";
 import {
   ViewLogin,
   ViewRegister,
-} from "../../controller/view_auth.controller.js";
-import { authRequired } from "../../middlewares/validateToken.js";
+} from "../../controller/views/view_auth.controller.js";
 export const app = express.Router();
 
 app.get("/login", ViewLogin);

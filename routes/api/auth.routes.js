@@ -1,11 +1,9 @@
 import express from "express";
 import {
   AuthLogin,
-  AuthProfile,
   AuthRegister,
   AuthLogout,
-} from "../../controller/auth.controller.js";
-import { authRequired } from "../../middlewares/validateToken.js";
+} from "../../controller/api/auth.controller.js";
 
 export const app = express.Router();
 

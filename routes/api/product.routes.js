@@ -5,7 +5,7 @@ import {
   addProduct,
   UpdateProduct,
   Removeproduct,
-} from "../../controller/product.controller.js";
+} from "../../controller/api/product.controller.js";
 export const app = express.Router();
 
 /* Trae los productos sus querys son 

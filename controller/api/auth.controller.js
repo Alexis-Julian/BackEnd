@@ -1,6 +1,6 @@
-import AuthManager from "../logic/auth_manager.js";
-import { STATUS_RES_GET } from "../utils.js";
-import userModel from "../models/user.model.js";
+import AuthManager from "../../logic/auth_manager.js";
+import { STATUS_RES_GET } from "../../utils.js";
+import userModel from "../../models/user.model.js";
 
 const AuthManagerI = new AuthManager();
 

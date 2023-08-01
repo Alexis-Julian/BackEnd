@@ -1,4 +1,4 @@
-import userModel from "../models/user.model.js";
+import userModel from "../../models/user.model.js";
 let usertest = "64acaa57a070ea86959d856e";
 
 export async function Chat(req, res) {

@@ -1,12 +1,10 @@
 import express from "express";
-import { PostMsg, CreateChat } from "../../controller/chat.controller.js";
-import chatModel from "../../models/chat.model.js";
-import userModel from "../../models/user.model.js";
+import { PostMsg, CreateChat } from "../../controller/api/chat.controller.js";
+
 export const app = express.Router();
 
+/* Ruta para crear el chat */
 app.post("/createchat", CreateChat);
 
-app.post("/postmsg", (req, res) => {
-  const { sender, recipient, body } = req.body;
-  res.send("Nice");
-});
+/* Ruta para enviar mensajes al chat creado por la rusta /createchat */
+app.post("/postmsg", PostMsg);

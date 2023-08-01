@@ -1,9 +1,10 @@
-import ChatManager from "../logic/chat_manager.js";
+import ChatManager from "../../logic/chat_manager.js";
 
 const ChatManagerI = new ChatManager();
 
 export function PostMsg(req, res) {
-  console.log(req.body);
+  const { sender, recipient, body } = req.body;
+
   res.send("Nice");
 }
 

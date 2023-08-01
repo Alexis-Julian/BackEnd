@@ -9,12 +9,6 @@ export default (app) => {
   app.set("view engine", "handlebars");
 };
 
-export const TOKEN = "hola";
-
-export const GITHUB_CLIENT_ID = "";
-
-export const GITHUB_CLIENT_SECRET = "";
-
 export const userAdmin = {
   username: "Coder",
   email: "adminCoder@coder.com",

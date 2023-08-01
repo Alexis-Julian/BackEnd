@@ -14,7 +14,6 @@ export default class AuthManager {
   /* Payload {email:email} */
   async userFound(payload) {
     let userFound;
-
     try {
       userFound = await userModel.findOne(payload).catch((e) => {
         throw new Error("User not found");

@@ -14,6 +14,7 @@ export default class AuthManager {
   /* Payload {email:email} */
   async userFound(payload) {
     let userFound;
+
     try {
       userFound = await userModel.findOne(payload).catch((e) => {
         throw new Error("User not found");
@@ -34,7 +35,7 @@ export default class AuthManager {
 
       let passhash = await this.passHash(password, user.password);
       if (!passhash) return ["Password incorrect", STATUS_TYPES.WARNING];
-      console.log("1111");
+
       /* Creacion de token */
       let token = await createToken({ id: user._id });
       callback(token);

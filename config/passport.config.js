@@ -39,10 +39,7 @@ const initializePassport = () => {
             img: profile._json.avatar_url,
           };
 
-          let validUser = await AuthManagerI.loginUser(profilel, (token) => {
-            console.log("123123");
-            console.log(token);
-          });
+          let validUser = await AuthManagerI.loginUser(profilel, (token) => {});
           if (STATUS_TYPES.INFO === validUser[1]) return done(null, validUser);
 
           let regiUser = await AuthManagerI.addUser(profilel, (token) => {

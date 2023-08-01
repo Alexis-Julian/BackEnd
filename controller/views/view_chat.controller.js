@@ -7,6 +7,5 @@ export async function Chat(req, res) {
     .populate("friends.friend")
     .select("-_id")
     .populate("chats.idchat");
-  /* console.log(user.friends); */
   res.render("chats", { user });
 }

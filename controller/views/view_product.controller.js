@@ -1,7 +1,7 @@
 import ProductManager from "../../logic/product_manager.js";
 import AuthManager from "../../logic/auth_manager.js";
 import jwt from "jsonwebtoken";
-import { userAdmin } from "../../config.js";
+
 import env from "../../config/enviroment.config.js";
 
 const ProductManagerI = new ProductManager();

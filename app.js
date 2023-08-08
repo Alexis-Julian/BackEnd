@@ -1,12 +1,13 @@
 import express from "express";
-import { connectMongoDb } from "./db.js";
-import userModel from "./models/user.model.js";
-
-connectMongoDb();
+import factory from "./dao/factory.js";
 
 // Ejemplo de uso
 
 
+factory()
+
 const app = express();
+
+
 
 export default app;

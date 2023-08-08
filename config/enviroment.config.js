@@ -17,4 +17,5 @@ export default {
   MONGO_URL: process.env.MONGO_URL,
   TOKEN: process.env.TOKEN_JWT,
   ADMIN: JSON.parse(process.env.ADMIN),
+  PERSISTENCE : process.env.PERSISTENCE
 };

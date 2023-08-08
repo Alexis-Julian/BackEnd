@@ -1,4 +1,4 @@
-import userModel from "../../models/user.model.js";
+import userModel from "../../dao/mongo/models/user.model.js";
 let usertest = "64acaa57a070ea86959d856e";
 
 export async function Chat(req, res) {
@@ -7,5 +7,6 @@ export async function Chat(req, res) {
     .populate("friends.friend")
     .select("-_id")
     .populate("chats.idchat");
+
   res.render("chats", { user });
 }

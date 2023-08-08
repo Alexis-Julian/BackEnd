@@ -1,5 +1,5 @@
-import userModel from "../models/user.model.js";
-import chatModel from "../models/chat.model.js";
+import userModel from "../dao/mongo/models/user.model.js";
+import chatModel from "../dao/mongo/models/chat.model.js";
 export default class ChatManager {
   CreateChat(users) {
     let aux = Object.values(users);

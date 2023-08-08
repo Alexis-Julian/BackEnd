@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import userModel from "../models/user.model.js";
+import userModel from "../dao/mongo/models/user.model.js";
 import { createToken } from "../libs/jwt.js";
 import { STATUS_TYPES } from "../utils.js";
 import env from "../config/enviroment.config.js";

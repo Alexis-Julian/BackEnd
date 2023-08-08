@@ -1,5 +1,5 @@
 import { STATUS_TYPES, PRODUCT_DICCIONARY } from "../utils.js";
-import productModel from "../models/product.model.js";
+import productModel from "../dao/mongo/models/product.model.js";
 
 /* Agregar modulos archivos */
 export default class ProductManager {

@@ -1,7 +1,7 @@
 import passport from "passport";
 /* import jwt from "passpor-jwt"; */
 import GitHubStrategy from "passport-github2";
-import userModel from "../models/user.model.js";
+import userModel from "../dao/mongo/models/user.model.js";
 import fetch from "node-fetch";
 import AuthManager from "../logic/auth_manager.js";
 import { STATUS_TYPES } from "../utils.js";
@@ -40,6 +40,7 @@ const initializePassport = () => {
           };
 
           let validUser = await AuthManagerI.loginUser(profilel, (token) => {});
+
           if (STATUS_TYPES.INFO === validUser[1]) return done(null, validUser);
 
           let regiUser = await AuthManagerI.addUser(profilel, (token) => {

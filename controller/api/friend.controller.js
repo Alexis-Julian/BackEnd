@@ -1,4 +1,4 @@
-import FriendManager from "../../logic/friend_manager.js";
+import FriendManager from "../../services/friend_manager.js";
 
 const IFriendManager = new FriendManager();
 export async function addFriend(req, res) {

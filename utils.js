@@ -51,6 +51,7 @@ export const PRODUCT_DICCIONARY = [
   "stock",
   "title",
 ];
+
 export const STATUS_RES_GET = (product, res) => {
   if (product[1] === STATUS_TYPES.ERROR) {
     res
@@ -76,4 +77,14 @@ export function FormatingRender(eformater) {
 
 export function IsIdValid(id) {
   return ObjectId.isValid(id);
+}
+
+export function ControllerError(data, res) {
+  if (!data)
+    return res.status(500).send({
+      status: "Error",
+      error: "Something went wrong, try again later",
+    });
+
+  res.send({ status: "success", result: data });
 }

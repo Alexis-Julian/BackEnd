@@ -1,4 +1,4 @@
-import ChatManager from "../../logic/chat_manager.js";
+import ChatManager from "../../services/chat_manager.js";
 
 const ChatManagerI = new ChatManager();
 

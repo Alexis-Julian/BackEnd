@@ -1,4 +1,4 @@
-import CartManager from "../../logic/cart_manager.js";
+import CartManager from "../../services/cart_manager.js";
 
 const CartManagerI = new CartManager();
 

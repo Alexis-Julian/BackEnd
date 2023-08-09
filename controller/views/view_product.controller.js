@@ -1,12 +1,10 @@
-import ProductManager from "../../logic/product_manager.js";
-import AuthManager from "../../logic/auth_manager.js";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
+import env from '../../config/enviroment.config.js';
+import { Auth as AuthFactory } from '../../dao/factory.js';
+import { Products as ProductFactory } from '../../dao/factory.js';
 
-import env from "../../config/enviroment.config.js";
-
-const ProductManagerI = new ProductManager();
-
-const AuthManagerI = new AuthManager();
+const AuthFactoryI = new AuthFactory();
+const ProductFactoryI = new ProductFactory();
 
 /* Esto es mal se supone que una vez adentro ya tendria informacion
 del usuario */
@@ -14,10 +12,9 @@ export async function getProducts(req, res) {
   const { token } = req.cookies;
 
   let { id } = jwt.verify(token, env.TOKEN);
-  let user = await AuthManagerI.userFound({ _id: id });
+  let user = await AuthFactoryI.UserFoundById(id);
 
-  let [product] = await ProductManagerI.getProduct(req.query);
-  let producpars = product.docs;
+  let { docs } = await ProductFactoryI.getProduct(req.query);
 
-  res.render("home", { producpars, user });
+  res.render('home', { docs, user });
 }

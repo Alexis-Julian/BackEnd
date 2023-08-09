@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { createToken } from '../libs/jwt.js';
-import { Auth, Auth as AuthFactory } from '../dao/factory.js';
+import { Auth as AuthFactory } from '../dao/factory.js';
 
 let AuthFactoryI = new AuthFactory();
 
@@ -20,7 +20,6 @@ export default class AuthManager {
     if (!userfetch) return null;
     /* Hash de la contraseña */
     let passhash = await passHash(user.password, userfetch.password);
-
     if (!passhash) return null;
 
     /* Creacion del token */

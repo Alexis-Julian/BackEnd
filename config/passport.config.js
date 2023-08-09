@@ -3,11 +3,10 @@ import passport from 'passport';
 import GitHubStrategy from 'passport-github2';
 import userModel from '../dao/mongo/models/user.model.js';
 import fetch from 'node-fetch';
-import AuthManager from '../services/auth_manager.js';
-import { STATUS_TYPES } from '../utils.js';
 import UserFrontDTO from '../services/DTOs/user.dto.front.js';
-const AuthManagerI = new AuthManager();
+import AuthManager from '../services/auth_manager.js';
 
+const AuthManagerI = new AuthManager();
 const initializePassport = () => {
   passport.use(
     'github',
@@ -26,22 +25,23 @@ const initializePassport = () => {
               'X-Github-Api-Version': '2022-11-28',
             },
           });
+          let token;
+
           const emails = await res.json();
           const emailDetail = emails.find((email) => email.verified == true);
           if (!emailDetail) {
             return done(new Error('cannot get a valid email for this user'));
           }
 
-          new UserFrontDTO(profile);
+          let user = { ...new UserFrontDTO(profile), password: 'nopass', email: emailDetail.email };
 
-          let validUser = await AuthManagerI.loginUser(profilel, (token) => {});
+          token = await AuthManagerI.loginUser(user, (token) => {});
 
-          if (STATUS_TYPES.INFO === validUser[1]) return done(null, validUser);
+          if (token) return done(null, token);
 
-          let regiUser = await AuthManagerI.addUser(profilel, (token) => {
-            /* console.log(token); */
-          });
-          return done(null, regiUser);
+          token = await AuthManagerI.addUser(user, (token) => {});
+
+          if (token) return done(null, token);
         } catch (e) {
           console.log('Error en auth github');
           console.log(e);
@@ -50,10 +50,8 @@ const initializePassport = () => {
       }
     )
   );
-  passport.serializeUser((validUser, done) => {
-    /* console.log("Serial", validUser); */
-    /* console.log(validUser); */
-    done(null, validUser);
+  passport.serializeUser((token, done) => {
+    done(null, token);
   });
   passport.deserializeUser(async (id, done) => {
     console.log('Por aqui');

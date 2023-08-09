@@ -28,9 +28,9 @@ export default class AuthFactory {
     return false;
   }
 
-  async UserFoundById(id) {
+  async UserFoundById(id, queries) {
     try {
-      return await userModel.findById(id).select('-password');
+      return await userModel.findByIdAndUpdate(id, queries && queries).select('-password');
     } catch (error) {
       console.log('Error:', error.message);
       return null;

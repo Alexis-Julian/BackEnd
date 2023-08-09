@@ -1,12 +1,13 @@
-import userModel from "../../dao/mongo/models/user.model.js";
-let usertest = "64acaa57a070ea86959d856e";
+import userModel from '../../dao/mongo/models/user.model.js';
+import jwt from 'jsonwebtoken';
+import env from '../../config/enviroment.config.js';
 
 export async function Chat(req, res) {
-  let user = await userModel
-    .findById({ _id: usertest })
-    .populate("friends.friend")
-    .select("-_id")
-    .populate("chats.idchat");
+  let token = req.session.passport.user;
 
-  res.render("chats", { user });
+  let { id } = jwt.verify(token, env.TOKEN);
+
+  let user = await userModel.findById(id).populate('friends.friend').select('-_id').populate('chats.idchat');
+
+  res.render('chats', { user });
 }

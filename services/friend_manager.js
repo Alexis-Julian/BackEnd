@@ -1,14 +1,25 @@
-import userModel from "../dao/mongo/models/user.model.js";
-const idTest = "64bf1070fdcd43c8c6c97681";
+import ObjectID from 'bson-objectid';
+import AuthFactory from '../dao/mongo/classes/auth.dao.js';
+
+const AuthFactoryI = new AuthFactory();
 
 export default class FriendManager {
-  async addFriend(id) {
-    /* No esta verificado por si el usuario ya esta agendando a su lista de amigo */
-    let aux = await userModel.findOneAndUpdate(
-      { _id: idTest },
-      { $push: { friends: { friend: id } } },
-      { new: true }
-    );
+  async addFriend(id, idfriend) {
+    let { _id } = await AuthFactoryI.UserFoundById(idfriend);
+    idfriend = _id;
+
+    let user = await AuthFactoryI.UserFoundById(id, AddFriendQueries(idfriend), { new: true });
+
+    return user;
   }
+
   removeFriend() {}
+}
+
+function AddFriendQueries(idfriend) {
+  return {
+    $push: {
+      friends: { friend: idfriend },
+    },
+  };
 }

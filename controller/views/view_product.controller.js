@@ -12,6 +12,7 @@ export async function getProducts(req, res) {
   const { token } = req.cookies;
 
   let { id } = jwt.verify(token, env.TOKEN);
+
   let user = await AuthFactoryI.UserFoundById(id);
 
   let { docs } = await ProductFactoryI.getProduct(req.query);

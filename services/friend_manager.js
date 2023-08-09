@@ -14,6 +14,11 @@ export default class FriendManager {
   }
 
   removeFriend() {}
+
+  async searchFriend(found) {
+    let users = await AuthFactoryI.UserFoundSimilar(found);
+    return users;
+  }
 }
 
 function AddFriendQueries(idfriend) {
@@ -22,4 +27,8 @@ function AddFriendQueries(idfriend) {
       friends: { friend: idfriend },
     },
   };
+}
+
+function searchCoincidence(found) {
+  return [{ username: { $regex: found, $options: 'i' } }];
 }

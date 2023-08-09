@@ -36,4 +36,13 @@ export default class AuthFactory {
       return null;
     }
   }
+
+  async UserFoundSimilar(found) {
+    try {
+      return await userModel.find({ email: { $regex: found, $options: 'i' } });
+    } catch (error) {
+      console.log('Error:', error.message);
+      return null;
+    }
+  }
 }

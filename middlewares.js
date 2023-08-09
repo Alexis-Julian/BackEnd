@@ -24,7 +24,7 @@ import morgan from 'morgan';
 import { file } from './config.js';
 
 export default (app) => {
-  /* app.use(morgan("dev")); */
+  app.use(morgan('dev'));
   app.use(express.json());
   app.use(cookieParser());
   app.use(passport.initialize());

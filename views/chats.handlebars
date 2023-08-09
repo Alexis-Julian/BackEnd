@@ -73,7 +73,7 @@
             </button>
 
             <!-- Modal header -->
-            <div class='bg-slate-900 flex w-full'>
+            <div class='bg-indigo-100 border border-gray-200 flex w-full'>
               <div class='px-6 py-4 w-full'>
                 <div class='relative w-5/6'>
                   <div class='absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none'>
@@ -84,8 +84,9 @@
                   </div>
                   <input
                     type='text'
+                    autocomplete='off'
                     id='input-group-1'
-                    class='text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                    class='text-center auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
                     placeholder='Ingrese email para agregar'
                   />
                 </div>
@@ -94,6 +95,12 @@
 
             <!-- Modal body -->
 
+          </div>
+          <div>
+            {{! Container_Searching_People }}
+            <form id='form_addfriend'>
+              <ul id='container_addfriend'></ul>
+            </form>
           </div>
         </div>
       </div>

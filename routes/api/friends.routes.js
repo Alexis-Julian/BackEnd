@@ -1,8 +1,10 @@
-import express from "express";
+import express from 'express';
 
-import { addFriend } from "../../controller/api/friend.controller.js";
+import { addFriend, searchFriend } from '../../controller/api/friend.controller.js';
 
 export const app = express.Router();
 
 /* Agregar amigos recibe el email */
-app.post("/add", addFriend);
+app.post('/add', addFriend);
+
+app.post('/search', searchFriend);

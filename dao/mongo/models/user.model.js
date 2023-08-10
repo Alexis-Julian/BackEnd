@@ -1,6 +1,6 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose, { mongo } from "mongoose";
 
-const collection = 'users';
+const collection = "users";
 const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     role: { type: String, required: true },
     img: { type: String },
     chats: {
-      type: [{ idchat: { type: mongoose.Schema.Types.ObjectId, ref: 'chats' } }],
+      type: [{ idchat: { type: mongoose.Schema.Types.ObjectId, ref: "chats" }, user: { type: mongoose.Schema.Types.ObjectId, ref: "users" } }],
       default: [],
     },
     friends: {
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
         {
           friend: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'users',
+            ref: "users",
           },
         },
       ],
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
         {
           user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'users',
+            ref: "users",
           },
         },
       ],

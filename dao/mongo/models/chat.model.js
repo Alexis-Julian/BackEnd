@@ -1,21 +1,23 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 let collection = "chats";
 
 const ChatSchema = new mongoose.Schema(
   {
-    members: { type: [{ user: { type: mongoose.Schema.Types.ObjectId } }] },
+    members: { type: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: "users" } }] },
     chat: {
       type: [
         {
           sender: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
             required: true,
           },
-          recipient: { type: String, required: true },
+          recipient: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
           body: { type: String, required: true },
         },
       ],
+      default: [],
     },
   },
   { versionKey: false }

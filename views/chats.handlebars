@@ -23,13 +23,12 @@
           <div class="leading-none ml-1 text-xs">Active</div>
         </div>
       </div>
-      <div class="h-4/6">
-        <ul role="list" class="divide-y divide-gray-100 gap-1 cursor-pointer flex flex-col">
+      <form class="h-4/6 m-0" method="submit" id="options_user">
+        <ul role="list" class="divide-y divide-gray-100 gap-1 flex flex-col cursor-pointer">
           {{#each user.friends}}
-            <li class="flex justify-between gap-x-6 py-5 bg-white hover:bg-gray-50 rounded-lg">
+            <li data-popover-target={{this.friend.username}} data-popover-trigger="click" data-popover-placement="right" class="flex justify-between gap-x-6 py-5 bg-white hover:bg-gray-50 rounded-lg" id={{this.friend.id}}>
               <div class="flex gap-x-4">
                 <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{this.friend.img}}" alt="" />
-
                 <div class="min-w-0 flex-auto">
                   <p class="text-sm font-semibold leading-6 text-gray-900">
                     {{this.friend.username}}</p>
@@ -41,10 +40,26 @@
                 <p class="mt-1 text-xs leading-5 text-gray-500">Last seen
                   <time datetime="2023-01-23T13:23Z">3h ago</time></p>
               </div>
+              <div
+                id={{this.friend.username}}
+                role="tooltip"
+                class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 cursor-default"
+              >
+                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700 flex justify-between">
+                  <h3 class="font-semibold text-gray-900 dark:text-white">{{this.friend.username}}</h3>
+                  <h3 class="font-semibold text-gray-900 dark:text-white">Desconectado</h3>
+                </div>
+                <div class="px-3 py-3 m-0 grid grid-rows-3 gap-2 text-center cursor-pointer">
+                  <button name="enter_chat" id={{this.friend._id}} type="submit" class="border-b hover:bg-gray-100">Ingresar al chat</button>
+                  <button name="clear_chat" di={{this.friend._id}} type="submit" class="border-b hover:bg-gray-100">Eliminar chat</button>
+                  <button name="dlt_friend" id={{this.friend._id}} type="submit" class="border-b hover:bg-gray-100">Eliminar amigo</button>
+                </div>
+              </div>
             </li>
           {{/each}}
         </ul>
-      </div>
+      </form>
+
       <div class="grid grid-cols-2">
         {{! Enviar Solicitudes }}
         <div>
@@ -185,280 +200,130 @@
       </div>
 
     </div>
-
-    <div class="bg-gray-50 dark:bg-gray-900 h-full w-full flex p-2">
-    </div>
-    {{! <div class="flex flex-col flex-auto h-full p-6 panel">
-      <div
-        class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
-      >
+    {{! Container Chat }}
+    <div class="flex flex-col flex-auto h-full p-6 panel">
+      <form id="panel_message" class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4 m-0">
+        {{!-- {{! Header Chats }}
+        <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
+          {{! --- }}
+          <div class="flex flex-wrap items-center p-4">
+            <a href="" class="flex items-center grow">
+              <div class="relative pr-3">
+                <img class="w-10 h-10 rounded-full" src="https://i.imgur.com/9zz7ubU.jpg" alt="" />
+                <span class="top-0 left-7 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+              </div>
+              <span class="self-center text-xl whitespace-nowrap dark:text-white"> Probando13</span>
+            </a>
+            {{! --- }}
+            <div class="flex items-center grow">
+              <a href="tel:5541251234" class="mr-6 text-sm text-gray-500 dark:text-white hover:underline">TEST</a>
+              <a href="#" class="text-sm text-blue-600 dark:text-blue-500 hover:underline">TEST</a>
+            </div>
+            {{! --- }}
+          </div>
+        </nav>
+        {{! Container mensajes }}
         <div class="flex flex-col h-full overflow-x-auto mb-4">
           <div class="flex flex-col h-full">
             <div class="grid grid-cols-12 gap-y-2">
+              {{! Inicia primer mensaje USER }}
               <div class="col-start-1 col-end-8 p-3 rounded-lg">
                 <div class="flex flex-row items-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
+                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
                     A
+                    {{! Imagen de quien envio el mensaje  }}
                   </div>
-                  <div
-                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                  >
-                    <div>Hey How are you today?</div>
+                  <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                    <div>
+                      Hey How are you today?
+                    </div>
+                    {{! Body del mensaje }}
                   </div>
                 </div>
               </div>
-              <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                <div class="flex flex-row items-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
+              {{! Termina el primer mensaje }}
+              {{! Inicia el segundo mensaje FRIEND }}
+              <div class="col-start-6 col-end-13 p-3 rounded-lg">
+                <div class="flex items-center justify-start flex-row-reverse">
+                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                    {{! Imange del amigo }}
                     A
                   </div>
-                  <div
-                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                  >
+                  <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
                     <div>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Vel ipsa commodi illum saepe numquam maxime asperiores
-                      voluptate sit, minima perspiciatis.
+                      I'm ok what about you?
+                      {{! Body del mensaje }}
                     </div>
                   </div>
                 </div>
               </div>
+              {{! Termina el segundo mensaje }}
+              {{! Inicia el tercer mensaje }}
               <div class="col-start-6 col-end-13 p-3 rounded-lg">
                 <div class="flex items-center justify-start flex-row-reverse">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
+                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                    {{! Imagen del amigo }}
                     A
                   </div>
-                  <div
-                    class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                  >
-                    <div>I'm ok what about you?</div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                <div class="flex items-center justify-start flex-row-reverse">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
-                    A
-                  </div>
-                  <div
-                    class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                  >
+                  <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
                     <div>
+                      {{! Body del mensaje }}
                       Lorem ipsum dolor sit, amet consectetur adipisicing. ?
                     </div>
                   </div>
                 </div>
               </div>
+              {{! Termina el tercer mensaje }}
+              {{! Inicia el cuarto mensaje }}
               <div class="col-start-1 col-end-8 p-3 rounded-lg">
                 <div class="flex flex-row items-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
+                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                    {{! Imagen del USUARIO }}
                     A
                   </div>
-                  <div
-                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                  >
+                  <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                    {{! Body del mensaje }}
                     <div>Lorem ipsum dolor sit amet !</div>
                   </div>
                 </div>
               </div>
-              <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                <div class="flex items-center justify-start flex-row-reverse">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
-                    A
-                  </div>
-                  <div
-                    class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                  >
-                    <div>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                    </div>
-                    <div
-                      class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
-                    >
-                      Seen
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                <div class="flex flex-row items-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
-                    A
-                  </div>
-                  <div
-                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                  >
-                    <div>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Perspiciatis, in.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                <div class="flex flex-row items-center">
-                  <div
-                    class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                  >
-                    A
-                  </div>
-                  <div
-                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                  >
-                    <div class="flex flex-row items-center">
-                      <button
-                        class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-800 rounded-full h-8 w-10"
-                      >
-                        <svg
-                          class="w-6 h-6 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                          ></path>
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                      </button>
-                      <div class="flex flex-row items-center space-x-px ml-4">
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-12 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-6 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-5 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-3 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-1 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-1 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
-                        <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {{! Termina el cuarto mensaje }}
             </div>
           </div>
         </div>
-        <div
-          class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
-        >
+        {{! Barra para enviar agregar emotes y compartir imagen }}
+        <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
           <div>
-            <button
-              class="flex items-center justify-center text-gray-400 hover:text-gray-600"
-            >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                ></path>
+            <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
               </svg>
             </button>
           </div>
           <div class="flex-grow ml-4">
             <div class="relative w-full">
-              <input
-                type="text"
-                class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
-              />
-              <button
-                class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
-              >
-                <svg
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
+              <input type="text" placeholder="Escribe un mensaje" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
+              <button class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </button>
             </div>
           </div>
           <div class="ml-4">
-            <button
-              class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
-            >
+            <button type="submit" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
               <span>Send</span>
               <span class="ml-2">
-                <svg
-                  class="w-4 h-4 transform rotate-45 -mt-px"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                  ></path>
+                <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                 </svg>
               </span>
             </button>
           </div>
-        </div>
-      </div>
-    </div> }}
+        </div> --}}
+
+      </form>
+    </div>
   </div>
 </div>
 <script src="/js/chat.js" type="module" defer></script>

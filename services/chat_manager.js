@@ -1,29 +1,41 @@
-import userModel from "../dao/mongo/models/user.model.js";
-import chatModel from "../dao/mongo/models/chat.model.js";
+import { Chat as ChatFactory, Auth as AuthFactory } from "../dao/factory.js";
+
+const ChatFactoryI = new ChatFactory();
+
+const AuthFactoryI = new AuthFactory();
+
 export default class ChatManager {
-  CreateChat(users) {
-    let aux = Object.values(users);
+  async CreateChat(id, idfriend) {
+    let chat;
 
-    let userid = this.UserFound(aux);
-  }
-  async UserFound(users) {
-    const ChatI = new chatModel();
-    const { _id } = ChatI;
-    let aux_users = await userModel.find({ email: { $in: users } });
+    chat = await ChatExist(id, idfriend);
 
-    aux_users.forEach((element) => {
-      /* element.chats.push({ idchat: _id }); */
-      ChatI.members.push({ user: element });
-    });
+    if (chat) return chat;
 
-    let aux_users_update = await userModel.updateMany(
-      { email: { $in: users } },
-      { $push: { chats: { idchat: _id } } },
-      { new: true }
-    );
+    chat = await ChatFactoryI.createChat(id, idfriend);
 
-    await ChatI.save();
+    if (!chat) return null;
+
+    let iduser = await AuthFactoryI.UserFoundById(id, { $push: { chats: { idchat: chat._id, user: idfriend } } });
+
+    if (!iduser) return null;
+
+    let userfriend = await AuthFactoryI.UserFoundById(idfriend, { $push: { chats: { idchat: chat._id, user: id } } });
+
+    if (!userfriend) return null;
+
+    return chat;
   }
 
-  async PostMsg() {}
+  async PostMsg(idchat, message) {}
+
+  async getChat(idchat) {
+    return await ChatFactoryI.getchat(idchat);
+  }
+}
+
+async function ChatExist(id, idfriend) {
+  let user = await AuthFactoryI.UserFoundById(id);
+
+  return user.chats.find((chat) => chat.user == idfriend);
 }

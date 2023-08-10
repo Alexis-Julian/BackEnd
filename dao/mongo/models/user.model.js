@@ -23,6 +23,16 @@ const userSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    request: {
+      type: [
+        {
+          user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users',
+          },
+        },
+      ],
+    },
   },
   { versionKey: false }
 );

@@ -1,13 +1,10 @@
-import ObjectID from 'bson-objectid';
-import AuthFactory from '../dao/mongo/classes/auth.dao.js';
+import ObjectID from "bson-objectid";
+import AuthFactory from "../dao/mongo/classes/auth.dao.js";
 
 const AuthFactoryI = new AuthFactory();
 
 export default class FriendManager {
   async addFriend(id, idfriend) {
-    let { _id } = await AuthFactoryI.UserFoundById(idfriend);
-    idfriend = _id;
-
     let user = await AuthFactoryI.UserFoundById(id, AddFriendQueries(idfriend), { new: true });
 
     return user;
@@ -19,6 +16,17 @@ export default class FriendManager {
     let users = await AuthFactoryI.UserFoundSimilar(found);
     return users;
   }
+
+  /* Modificar removeRequest y requestFriend para que hagan lo mismo por queries */
+  async requestRemove(iduser, idfriend) {
+    let user = await AuthFactoryI.UserUpdateOne(iduser, { $pull: { request: { user: idfriend } } });
+    return user;
+  }
+
+  async requestFriend(idfriend, iduser) {
+    let user = await AuthFactoryI.UserFoundById(idfriend, { $push: { request: { user: iduser } } });
+    return user;
+  }
 }
 
 function AddFriendQueries(idfriend) {
@@ -27,8 +35,4 @@ function AddFriendQueries(idfriend) {
       friends: { friend: idfriend },
     },
   };
-}
-
-function searchCoincidence(found) {
-  return [{ username: { $regex: found, $options: 'i' } }];
 }

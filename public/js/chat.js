@@ -1,21 +1,21 @@
-const input_email = document.getElementById('input-group-1');
-const cont_addfriend = document.getElementById('container_addfriend');
-const form_addfriend = document.getElementById('form_addfriend');
-
+const input_email = document.getElementById("input-group-1");
+const cont_addfriend = document.getElementById("container_addfriend");
+const form_addfriend = document.getElementById("form_addfriend");
+const form_requestfriend = document.getElementById("form_requestfriend");
 async function newFriend(idfriend) {
-  let a = await fetch('http://localhost:8080/api/friends/add', {
-    method: 'POST',
+  let a = await fetch("http://localhost:8080/api/friends/add", {
+    method: "POST",
     body: JSON.stringify(idfriend),
   });
   let data = await a.json();
   console.log(data);
 }
 
-input_email.addEventListener('keydown', async (e) => {
+input_email.addEventListener("keydown", async (e) => {
   if (e.keyCode === 13) {
-    let response = await fetch('http://localhost:8080/api/friends/search', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    let response = await fetch("http://localhost:8080/api/friends/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: e.target.value }),
     });
     let data = await response.json();
@@ -27,9 +27,31 @@ input_email.addEventListener('keydown', async (e) => {
   }
 });
 
-form_addfriend.addEventListener('submit', (e) => {
+form_addfriend.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log(e.submitter.name);
+
+  let iduser = { reqfriend: e.submitter.name };
+
+  let response = await fetch("http://localhost:8080/api/friends/solicitude/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(iduser),
+  });
+  let data = await response.json();
+  console.log(data);
+});
+
+form_requestfriend.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  let btn = e.submitter.id;
+  let id = e.submitter.name;
+
+  if (e.submitter.id == "accept") {
+    acceptrequest(id);
+  } else {
+    declinerequest(id);
+  }
 });
 
 function userfriend(user) {
@@ -37,7 +59,7 @@ function userfriend(user) {
     <hr/>
     <li class='flex justify-between gap-x-6 py-5 bg-white hover:bg-gray-50 rounded-lg'>
         <div class='flex gap-x-4 pl-2'>
-            <img class='h-12 w-12 flex-none rounded-full bg-gray-50' src='${user.img ? user.img : ' https://i.imgur.com/9zz7ubU.jpg'}' alt='' />
+            <img class='h-12 w-12 flex-none rounded-full bg-gray-50' src='${user.img ? user.img : " https://i.imgur.com/9zz7ubU.jpg"}' alt='' />
             <div class='min-w-0 flex-auto'>
                 <p class='text-sm font-semibold leading-6 text-gray-900'>${user.username}</p>
                 <p class='mt-1 truncate text-xs leading-5 text-gray-500'>${user.email}</p>
@@ -50,4 +72,24 @@ function userfriend(user) {
         </div>
 
     </li>`;
+}
+
+async function declinerequest(id) {
+  let response = await fetch("http://localhost:8080/api/friends/solicitude/decline", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ idfriend: id }),
+  });
+  let data = await response.json();
+  console.log(data);
+}
+
+async function acceptrequest(id) {
+  let response = await fetch("http://localhost:8080/api/friends/solicitude/accept", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ idfriend: id }),
+  });
+  let data = await response.json();
+  console.log(data);
 }

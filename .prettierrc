@@ -1,5 +1,13 @@
 {
-  "singleQuote": true,
+  "singleQuote": false,
   "semi": true,
-  "printWidth": 300
+  "printWidth": 300,
+  "overrides": [
+    {
+      "files": "*.handlebars",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }

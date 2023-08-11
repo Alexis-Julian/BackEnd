@@ -27,10 +27,14 @@ export default class ChatManager {
     return chat;
   }
 
-  async PostMsg(idchat, message) {}
+  async PostMsg(idchat, message) {
+    let data = await ChatFactoryI.insertMessage(idchat, { $push: { chat: message } });
+    return data;
+  }
 
   async getChat(idchat) {
-    return await ChatFactoryI.getchat(idchat);
+    let chat = await ChatFactoryI.getchat(idchat);
+    return chat;
   }
 }
 

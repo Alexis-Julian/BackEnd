@@ -202,9 +202,9 @@
     </div>
     {{! Container Chat }}
     <div class="flex flex-col flex-auto h-full p-6 panel">
-      <form id="panel_message" class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4 m-0">
-        {{!-- {{! Header Chats }}
-        <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
+      <form id="panel_message" class="grid panel_chat_grid rounded-2xl bg-gray-100 h-full p-4 m-0">
+        {{! Header Chats }}
+        {{!-- <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
           {{! --- }}
           <div class="flex flex-wrap items-center p-4">
             <a href="" class="flex items-center grow">
@@ -221,78 +221,15 @@
             </div>
             {{! --- }}
           </div>
-        </nav>
+        </nav> --}}
         {{! Container mensajes }}
-        <div class="flex flex-col h-full overflow-x-auto mb-4">
-          <div class="flex flex-col h-full">
-            <div class="grid grid-cols-12 gap-y-2">
-              {{! Inicia primer mensaje USER }}
-              <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                <div class="flex flex-row items-center">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                    A
-                    {{! Imagen de quien envio el mensaje  }}
-                  </div>
-                  <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                    <div>
-                      Hey How are you today?
-                    </div>
-                    {{! Body del mensaje }}
-                  </div>
-                </div>
-              </div>
-              {{! Termina el primer mensaje }}
-              {{! Inicia el segundo mensaje FRIEND }}
-              <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                <div class="flex items-center justify-start flex-row-reverse">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                    {{! Imange del amigo }}
-                    A
-                  </div>
-                  <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                    <div>
-                      I'm ok what about you?
-                      {{! Body del mensaje }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {{! Termina el segundo mensaje }}
-              {{! Inicia el tercer mensaje }}
-              <div class="col-start-6 col-end-13 p-3 rounded-lg">
-                <div class="flex items-center justify-start flex-row-reverse">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                    {{! Imagen del amigo }}
-                    A
-                  </div>
-                  <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                    <div>
-                      {{! Body del mensaje }}
-                      Lorem ipsum dolor sit, amet consectetur adipisicing. ?
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {{! Termina el tercer mensaje }}
-              {{! Inicia el cuarto mensaje }}
-              <div class="col-start-1 col-end-8 p-3 rounded-lg">
-                <div class="flex flex-row items-center">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                    {{! Imagen del USUARIO }}
-                    A
-                  </div>
-                  <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                    {{! Body del mensaje }}
-                    <div>Lorem ipsum dolor sit amet !</div>
-                  </div>
-                </div>
-              </div>
-              {{! Termina el cuarto mensaje }}
-            </div>
+        <div class="row-start-2 flex flex-col h-full overflow-x-auto mb-4">
+          <div class="flex flex-col h-full" id="message_cont">
+            1
           </div>
         </div>
         {{! Barra para enviar agregar emotes y compartir imagen }}
-        <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+        <div class="row-start-3 self-end flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
           <div>
             <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -302,8 +239,8 @@
           </div>
           <div class="flex-grow ml-4">
             <div class="relative w-full">
-              <input type="text" placeholder="Escribe un mensaje" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
-              <button class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
+              <input name="msg" type="text" placeholder="Escribe un mensaje" id="input_message_chat" class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
+              <button type="button" class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
@@ -311,7 +248,7 @@
             </div>
           </div>
           <div class="ml-4">
-            <button type="submit" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
+            <button type="button" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
               <span>Send</span>
               <span class="ml-2">
                 <svg class="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -320,8 +257,7 @@
               </span>
             </button>
           </div>
-        </div> --}}
-
+        </div>
       </form>
     </div>
   </div>

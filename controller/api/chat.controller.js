@@ -37,6 +37,6 @@ export async function getChat(req, res) {
   let result = await ChatManagerI.getChat(req.params.chatid);
 
   result = new ChatDTO(result, id);
-
+  console.log(result);
   ControllerError(result, res);
 }

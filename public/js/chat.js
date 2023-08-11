@@ -82,10 +82,42 @@ async function sendMsg(idfriend, chatid, msg) {
   return data;
 }
 
-function rendermsg(chat, receiver) {}
+function rendermsg(chat) {
+  let { sender, receiver } = chat.members;
+  chat.chat.forEach((element) => {
+    if (element.sender == chat.members.sender.id) {
+      cont_message.innerHTML += `<div class="col-start-1 col-end-8 p-3 rounded-lg">
+      <div class="flex flex-row items-center">
+        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+          <img class="rounded-full" src="${sender.img}" alt="">
+        </div>
+        <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+          <div>
+            ${element.body}
+          </div>
+        </div>
+      </div>`;
+    } else {
+      cont_message.innerHTML += `<div class="col-start-6 col-end-13 p-3 rounded-lg">
+      <div class="flex items-center justify-start flex-row-reverse">
+        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+          <img class="rounded-full" src="${receiver.img}" alt="">
+        </div>
+        <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
+          <div>
+            ${element.body}
+          </div>
+        </div>
+      </div>
+    </div>`;
+    }
+  });
+}
 
 async function renderchat(chat) {
-  let [sender, receiver] = chat.members;
+  let { sender, receiver } = chat.members;
+
+  rendermsg(chat);
 
   const deletenav = form_panel_message.querySelector("nav");
   if (deletenav) form_panel_message.removeChild(deletenav);
@@ -93,12 +125,12 @@ async function renderchat(chat) {
   form_panel_message.innerHTML += `
     <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
       <div class="flex flex-wrap items-center p-4">
-        <button type="submit" name=${chat.id} id=${receiver.receiver.id} href="" class="flex items-center grow">
+        <button type="submit" name=${chat.id} id=${receiver.id} href="" class="flex items-center grow">
           <div class="relative pr-3">
-            <img class="w-10 h-10 rounded-full" src="${receiver.receiver.img}" alt="" />
+            <img class="w-10 h-10 rounded-full" src="${receiver.img}" alt="" />
             <span class="top-0 left-7 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
           </div>
-          <span class="self-center text-xl whitespace-nowrap dark:text-white">${receiver.receiver.username}</span>
+          <span class="self-center text-xl whitespace-nowrap dark:text-white">${receiver.username}</span>
         </button>
         <div class="flex items-center grow">
           <a href="tel:5541251234" class="mr-6 text-sm text-gray-500 dark:text-white hover:underline">TEST</a>
@@ -108,7 +140,7 @@ async function renderchat(chat) {
     </nav>
   `;
 
-  rendermsg(chat, receiver.receiver.id);
+  rendermsg(chat, receiver.id);
 }
 
 input_email.addEventListener("keydown", async (e) => {
@@ -163,7 +195,6 @@ form_options_user.addEventListener("submit", async (e) => {
       let chatid = await getchatid(id);
       let render = await getChat(chatid);
       await renderchat(render);
-
       break;
     case "clear_chat":
       console.log(2);

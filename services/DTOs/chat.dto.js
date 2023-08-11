@@ -3,16 +3,24 @@ import UserFrontDTO from "./user.dto.front.js";
 export default class ChatDTO {
   constructor(chat, id) {
     this.id = chat._id;
-    this.members = chat.members.map((e) => {
+    this.members = this.formatmembers(chat, id);
+    this.chat = this.formatmsg(chat);
+  }
+
+  formatmembers(chat, id) {
+    let members = { sender: {}, receiver: {} };
+    let a = chat.members.map((e) => {
       if (e.user.id == id) {
-        let sender = { ...new UserFrontDTO(e.user) };
-        return { sender: sender };
+        members.sender = new UserFrontDTO(e.user);
       } else {
-        let receiver = { ...new UserFrontDTO(e.user) };
-        return { receiver: receiver };
+        members.receiver = new UserFrontDTO(e.user);
       }
     });
-    this.chat = chat.chat.map((e) => {
+    return members;
+  }
+
+  formatmsg(chat) {
+    return chat.chat.map((e) => {
       return { sender: e.sender, recipient: e.recipient, body: e.body };
     });
   }

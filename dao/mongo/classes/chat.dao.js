@@ -16,7 +16,11 @@ export default class ChatFactory {
   }
   async insertMessage(idchat, queries) {
     try {
-      return await chatmodel.findByIdAndUpdate(idchat, queries && queries);
+      let data = await chatmodel
+        .findByIdAndUpdate(idchat, queries && queries, { new: true })
+        .populate("chat.sender")
+        .populate("chat.recipient");
+      return data.chat.pop();
     } catch (error) {
       console.log("Error:", error.message);
       return null;

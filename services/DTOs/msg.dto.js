@@ -1,7 +1,8 @@
+import UserFrontDTO from "./user.dto.front.js";
 export default class MsgDTO {
   constructor(msg) {
-    this.sender = msg.id;
-    this.recipient = msg.idfriend;
-    this.body = msg.msg;
+    this.sender = new UserFrontDTO(msg.sender);
+    this.receiver = new UserFrontDTO(msg.recipient);
+    this.body = msg.body;
   }
 }

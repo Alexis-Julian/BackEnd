@@ -200,34 +200,28 @@
       </div>
 
     </div>
-    {{! Container Chat }}
     <div class="flex flex-col flex-auto h-full p-6 panel">
-      <form id="panel_message" class="grid panel_chat_grid rounded-2xl bg-gray-100 h-full p-4 m-0">
-        {{! Header Chats }}
-        {{!-- <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
-          {{! --- }}
+      <i id="panel_message_view">Ingrese ha algunos de sus contactos para emepezar a chatear</i>
+      <form id="panel_message" class="hidden grid panel_chat_grid rounded-2xl bg-gray-100 h-full p-4 m-0">
+        <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
           <div class="flex flex-wrap items-center p-4">
-            <a href="" class="flex items-center grow">
+            <button class="flex items-center grow">
               <div class="relative pr-3">
                 <img class="w-10 h-10 rounded-full" src="https://i.imgur.com/9zz7ubU.jpg" alt="" />
                 <span class="top-0 left-7 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </div>
-              <span class="self-center text-xl whitespace-nowrap dark:text-white"> Probando13</span>
-            </a>
-            {{! --- }}
+              <h4 class="self-center text-xl whitespace-nowrap dark:text-white"> Probando13</h4>
+            </button>
             <div class="flex items-center grow">
-              <a href="tel:5541251234" class="mr-6 text-sm text-gray-500 dark:text-white hover:underline">TEST</a>
-              <a href="#" class="text-sm text-blue-600 dark:text-blue-500 hover:underline">TEST</a>
+              <a class="mr-6 text-sm text-gray-500 dark:text-white hover:underline">TEST</a>
+              <a class="text-sm text-blue-600 dark:text-blue-500 hover:underline">TEST</a>
             </div>
-            {{! --- }}
           </div>
-        </nav> --}}
-        {{! Container mensajes }}
-        <div class="row-start-2 flex flex-col h-full overflow-x-auto mb-4">
+        </nav>
+        <div class="row-start-2 flex flex-col h-full overflow-x-auto mb-4" id="cont_message_scroll">
           <div class="flex flex-col h-full" id="message_cont">
           </div>
         </div>
-        {{! Barra para enviar agregar emotes y compartir imagen }}
         <div class="row-start-3 self-end flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
           <div>
             <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
@@ -246,6 +240,7 @@
               </button>
             </div>
           </div>
+
           <div class="ml-4">
             <button type="button" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
               <span>Send</span>
@@ -256,9 +251,11 @@
               </span>
             </button>
           </div>
+
         </div>
       </form>
     </div>
   </div>
 </div>
+<script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js" type="module" defer></script>

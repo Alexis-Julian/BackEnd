@@ -6,6 +6,35 @@ const form_options_user = document.getElementById("options_user");
 const form_panel_message = document.getElementById("panel_message");
 const input_message = document.getElementById("input_message_chat");
 const cont_message = document.getElementById("message_cont");
+const cont_message_scroll = document.getElementById("cont_message_scroll");
+const panel_message_view = document.getElementById("panel_message_view");
+
+const socket = io();
+let chatactive = 0;
+
+socket.on("SocketId", (id) => {
+  console.log("Bienvenido usuario: " + id);
+
+  socket.on(`${id}:message`, (data) => {
+    console.log("Nuevo mensaje!");
+
+    let info = form_panel_message.querySelector("nav").querySelector("button")["name"];
+
+    if (chatactive == info) {
+      cont_message.innerHTML += receivermsg(data.sender, data.body);
+      scrollHeight(cont_message_scroll, cont_message_scroll.scrollHeight);
+    }
+  });
+
+  socket.on(`${id}:solicitud`, (data) => {
+    console.log("Nueva solicitud!");
+  });
+
+  socket.on(`${id}:active`, (data) => {
+    console.log("Chat Active!: " + data);
+    chatactive = data;
+  });
+});
 
 async function newFriend(idfriend) {
   let a = await fetch("http://localhost:8080/api/friends/add", {
@@ -82,65 +111,77 @@ async function sendMsg(idfriend, chatid, msg) {
   return data;
 }
 
-function rendermsg(chat) {
-  let { sender, receiver } = chat.members;
-  chat.chat.forEach((element) => {
-    if (element.sender == chat.members.sender.id) {
-      cont_message.innerHTML += `<div class="col-start-1 col-end-8 p-3 rounded-lg">
-      <div class="flex flex-row items-center">
-        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-          <img class="rounded-full" src="${sender.img}" alt="">
-        </div>
-        <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-          <div>
-            ${element.body}
-          </div>
-        </div>
-      </div>`;
-    } else {
-      cont_message.innerHTML += `<div class="col-start-6 col-end-13 p-3 rounded-lg">
+function sendermsg(sender, body) {
+  return `<div class="col-start-1 col-end-8 p-3 rounded-lg">
+  <div class="flex flex-row items-center">
+    <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+      <img class="rounded-full" src="${sender.img}" alt="">
+    </div>
+    <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+      <div>
+        ${body}
+      </div>
+    </div>
+  </div>`;
+}
+function receivermsg(receiver, body) {
+  return `<div class="col-start-6 col-end-13 p-3 rounded-lg">
       <div class="flex items-center justify-start flex-row-reverse">
         <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
           <img class="rounded-full" src="${receiver.img}" alt="">
         </div>
         <div class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
           <div>
-            ${element.body}
+            ${body}
           </div>
         </div>
       </div>
     </div>`;
+}
+
+function rendermsg(chat) {
+  let { sender, receiver } = chat.members;
+  chat.chat.forEach((element) => {
+    if (element.sender == chat.members.sender.id) {
+      cont_message.innerHTML += sendermsg(sender, element.body);
+    } else {
+      cont_message.innerHTML += receivermsg(receiver, element.body);
     }
   });
+}
+
+function scrollHeight(node, scrollY) {
+  node.scrollTop = scrollY;
 }
 
 async function renderchat(chat) {
   let { sender, receiver } = chat.members;
 
-  rendermsg(chat);
+  cont_message.innerHTML = "";
 
-  const deletenav = form_panel_message.querySelector("nav");
-  if (deletenav) form_panel_message.removeChild(deletenav);
+  const panel_message = form_panel_message.querySelector("nav");
 
-  form_panel_message.innerHTML += `
-    <nav class="rounded-xl bg-white border-gray-200 dark:bg-gray-900">
-      <div class="flex flex-wrap items-center p-4">
-        <button type="submit" name=${chat.id} id=${receiver.id} href="" class="flex items-center grow">
-          <div class="relative pr-3">
-            <img class="w-10 h-10 rounded-full" src="${receiver.img}" alt="" />
-            <span class="top-0 left-7 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-          </div>
-          <span class="self-center text-xl whitespace-nowrap dark:text-white">${receiver.username}</span>
-        </button>
-        <div class="flex items-center grow">
-          <a href="tel:5541251234" class="mr-6 text-sm text-gray-500 dark:text-white hover:underline">TEST</a>
-          <a href="#" class="text-sm text-blue-600 dark:text-blue-500 hover:underline">TEST</a>
-        </div>
-      </div>
-    </nav>
-  `;
+  const button = panel_message.querySelector("button");
+
+  const img_receiver = panel_message.querySelector("img");
+
+  const name_receiver = panel_message.querySelector("h4");
+
+  img_receiver.src = `${receiver.img}`;
+
+  button.setAttribute("name", chat.id);
+
+  button.id = receiver.id;
+
+  name_receiver.innerHTML = receiver.username;
+
+  panel_message_view.remove();
+
+  form_panel_message.classList.remove("hidden");
 
   rendermsg(chat, receiver.id);
+
+  scrollHeight(cont_message_scroll, cont_message_scroll.scrollHeight);
 }
 
 input_email.addEventListener("keydown", async (e) => {
@@ -210,10 +251,20 @@ form_options_user.addEventListener("submit", async (e) => {
 form_panel_message.addEventListener("submit", async (e) => {
   e.preventDefault();
   let info = form_panel_message.querySelector("nav").querySelector("button");
+
   let chatid = info.name;
+
   let idfriend = info.id;
+
   let msg = e.target["msg"].value;
+
   if (info && idfriend && chatid) {
     let data = await sendMsg(idfriend, chatid, msg);
+    if (data) {
+      cont_message.innerHTML += sendermsg(data.result.sender, data.result.body);
+      scrollHeight(cont_message_scroll, cont_message_scroll.scrollHeight);
+    }
   }
+
+  e.target["msg"].value = "";
 });

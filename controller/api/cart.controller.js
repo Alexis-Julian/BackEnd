@@ -1,5 +1,5 @@
-import CartManager from '../../services/cart_manager.js';
-import { ControllerError } from '../../utils.js';
+import CartManager from "../../services/cart_manager.js";
+import { ControllerError } from "../../utils.js";
 /* Instanciado de clase manipulacion de productos */
 const CartManagerI = new CartManager();
 
@@ -21,7 +21,9 @@ export async function addCart(req, res) {
 export async function addProductCart(req, res) {
   const { cid, pid } = req.params;
 
-  const result = await CartManagerI.addProductCart(cid, pid, 'ADD');
+  const { q } = req.query;
+
+  const result = await CartManagerI.addProductCart(cid, pid, "ADD", q);
 
   ControllerError(result, res);
 }
@@ -39,7 +41,7 @@ export async function ClearProductCart(req, res) {
 export async function UpdateProductCart(req, res) {
   const { cid, pid } = req.params;
 
-  let result = await CartManagerI.addProductCart(cid, pid, 'REP', req.body);
+  let result = await CartManagerI.addProductCart(cid, pid, "REP", req.body);
 
   ControllerError(result, res);
 }
@@ -48,7 +50,14 @@ export async function UpdateProductCart(req, res) {
 export async function DeleteOneQuantity(req, res) {
   const { cid, pid } = req.params;
 
-  let msg = await CartManagerI.addProductCart(cid, pid, 'SUBB');
+  let msg = await CartManagerI.addProductCart(cid, pid, "SUBB");
 
   STATUS_RES_GET(msg, res);
+}
+
+export async function Purchase(req, res) {
+  let { cid } = req.params;
+
+  let result = await CartManagerI.PurchaseCart(cid);
+  res.send("123");
 }

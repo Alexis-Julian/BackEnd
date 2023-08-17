@@ -4,8 +4,7 @@ let TicketFactoryI = new TicketFactory();
 
 export default class TicketManager {
   createTicket(data) {
-    console.log(data);
-    /* let ticket = TicketFactoryI.newTicket(data); */
-    return 1;
+    let ticket = TicketFactoryI.newTicket(data);
+    return ticket;
   }
 }

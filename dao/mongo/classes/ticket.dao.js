@@ -13,8 +13,13 @@ export default class TicketFactory {
   }
 
   async newTicket(ticket) {
-    let Newticket = new ticketModel(ticket);
-    console.log(Newticket);
-    return Newticket;
+    try {
+      let Newticket = new ticketModel(ticket);
+      await Newticket.save();
+      return Newticket;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 }

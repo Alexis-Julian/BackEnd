@@ -59,5 +59,6 @@ export async function Purchase(req, res) {
   let { cid } = req.params;
 
   let result = await CartManagerI.PurchaseCart(cid);
-  res.send("123");
+
+  ControllerError(result, res);
 }

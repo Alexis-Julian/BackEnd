@@ -52,9 +52,9 @@ export default class CartManager {
 
         if (!pro_upd) return null;
 
-        /* let cart_upd = await this.deleteProductCart(cart.id, e.product.id);
+        let cart_upd = await this.deleteProductCart(cart.id, e.product.id);
 
-        if (!cart_upd) return null; */
+        if (!cart_upd) return null;
 
         amount += e.product.price * e.quantity;
 
@@ -63,12 +63,14 @@ export default class CartManager {
         products.discarded.push(e.product);
       }
     }
-    console.log(amount);
-    console.log(products);
-    /* let ticket = new TicketDTO(products.approved);
-    TicketManagerI.createTicket(products.approved); */
 
-    return products;
+    if (products.approved.length > 0) {
+      let ticket = new TicketDTO({ amount, product: products.approved });
+
+      ticket = TicketManagerI.createTicket(ticket);
+    }
+
+    return ["Ticket no generado" || ticket, products.discarded];
   }
 
   async deleteProductCart(cid, pid) {

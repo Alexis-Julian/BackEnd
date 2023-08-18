@@ -1,11 +1,5 @@
 import express from "express";
-import {
-  getProducts,
-  getProductById,
-  addProduct,
-  UpdateProduct,
-  Removeproduct,
-} from "../../controller/api/product.controller.js";
+import { getProducts, getProductById, addProduct, UpdateProduct, Removeproduct } from "../../controller/api/product.controller.js";
 export const app = express.Router();
 
 /* Trae los productos sus querys son 
@@ -24,4 +18,4 @@ app.post("/", addProduct);
 app.put("/:pid", UpdateProduct);
 
 /* Elimina un producto por id especificada */
-app.get("/:pid", Removeproduct);
+app.delete("/:pid", Removeproduct);

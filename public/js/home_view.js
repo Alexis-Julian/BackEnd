@@ -1,18 +1,83 @@
 import getPageQuery from "./utils.js";
+
 const form = document.getElementById("form_submit");
+
 async function sendProduct(idp) {
-  let cart = prompt("Intgrese el id del carrito");
-  if (cart) {
-    const url = `http://localhost:8080/api/carts/${cart}/product/${idp}`;
-    let response = await fetch(url, { method: "POST" });
-    let data = await response.json();
-    alert(data.data);
-  }
+  console.log(idp);
+  const url = `http://localhost:8080/api/carts/undefined/product/${idp}`;
+  let response = await fetch(url, { method: "POST" });
+  let data = await response.json();
+  console.log(data);
 }
-form.addEventListener("submit", (e) => {
+
+async function fetchchangeproduct(idp, value) {
+  let result = await fetch(`http://localhost:8080/api/products/${idp}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(value) });
+  result = await result.json();
+  return result;
+}
+
+async function removeProduct(idp) {
+  let result = await fetch(`http://localhost:8080/api/products/${idp}`, { method: "DELETE" });
+  result = await result.json();
+  console.log(result);
+  return result;
+}
+
+function changeProduct(input, callback) {
+  input.disabled = false;
+  input.focus();
+  input.addEventListener("keydown", async (e) => {
+    if (e.keyCode === 13) {
+      input.value = e.target.value;
+
+      await callback(input.value);
+
+      input.disabled = true;
+    }
+  });
+}
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  let idp = e.submitter.name;
-  sendProduct(idp);
+
+  form.classList.add("pointer-events-none");
+
+  let instruction = e.submitter.name;
+
+  let idp = e.submitter.querySelector("#product");
+
+  let input = e.submitter.querySelector("input");
+
+  if (idp) idp = idp.getAttribute("name");
+  switch (instruction) {
+    case "category":
+      changeProduct(input, async (value) => {
+        await fetchchangeproduct(idp, { category: value });
+      });
+
+      form.classList.remove("pointer-events-none");
+      break;
+    case "price":
+      changeProduct(input, async (value) => {
+        value = value.slice(1, value.length);
+        await fetchchangeproduct(idp, { price: value });
+      });
+
+      form.classList.remove("pointer-events-none");
+      break;
+    case "stock":
+      changeProduct(input, async (value) => {
+        await fetchchangeproduct(idp, { stock: parseInt(value) });
+      });
+
+      form.classList.remove("pointer-events-none");
+      break;
+    default:
+      await removeProduct(instruction);
+
+      break;
+  }
+  /* sendProduct(idp); */
 });
 
 /* Siguiente pagina de productos */

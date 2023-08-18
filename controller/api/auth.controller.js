@@ -5,8 +5,8 @@ import userModel from "../../dao/mongo/models/user.model.js";
 const AuthManagerI = new AuthManager();
 
 export async function AuthLogin(req, res) {
-  let result = await AuthManagerI.loginUser(req.body, (token) => {
-    req.session.passport = { user: token };
+  let result = await AuthManagerI.loginUser(req.body, (token, cart) => {
+    req.session.passport = { user: token, cart: cart };
     res.cookie("token", token);
   });
 
@@ -14,8 +14,8 @@ export async function AuthLogin(req, res) {
 }
 
 export async function AuthRegister(req, res) {
-  let user = await AuthManagerI.addUser(req.body, (token) => {
-    req.session.passport = { user: token };
+  let user = await AuthManagerI.addUser(req.body, (token, cart) => {
+    req.session.passport = { user: token, cart: cart };
     res.cookie("token", token);
   });
 

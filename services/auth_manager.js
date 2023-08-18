@@ -1,8 +1,9 @@
-import bcrypt from 'bcrypt';
-import { createToken } from '../libs/jwt.js';
-import { Auth as AuthFactory } from '../dao/factory.js';
+import bcrypt from "bcrypt";
+import { createToken } from "../libs/jwt.js";
+import { Auth as AuthFactory, Cart as CartFactory } from "../dao/factory.js";
 
 let AuthFactoryI = new AuthFactory();
+let CartFactoryI = new CartFactory();
 
 export default class AuthManager {
   async loginUser(user, callback) {
@@ -10,8 +11,9 @@ export default class AuthManager {
     const isAdmin = AuthFactoryI.UserIsAdmin(user);
 
     if (isAdmin) {
-      let token = await createToken({ id: 'admin' });
+      let token = await createToken({ id: "admin" });
       callback(token);
+      return token;
     }
     /* Fetching al usuario con email especificado */
 
@@ -25,7 +27,7 @@ export default class AuthManager {
     /* Creacion del token */
     let token = await createToken({ id: userfetch._id });
 
-    callback(token);
+    callback(token, userfetch.cart);
     return token;
   }
 
@@ -34,13 +36,15 @@ export default class AuthManager {
     let email = await AuthFactoryI.UserFoundByEmail(user.email);
 
     if (email) {
-      console.log('Email already exists');
+      console.log("Email already exists");
       return null;
     }
 
     let passencrypt = await Encrypt(user.password);
 
-    user = { ...user, password: passencrypt };
+    let cart = await CartFactoryI.addCart();
+
+    user = { ...user, password: passencrypt, cart: cart._id };
 
     user = await AuthFactoryI.addUser(user);
 
@@ -48,7 +52,8 @@ export default class AuthManager {
 
     let token = await createToken({ id: user._id });
 
-    callback(token);
+    callback(token, cart._id);
+
     return token;
   }
 }

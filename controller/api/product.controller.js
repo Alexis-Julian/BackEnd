@@ -1,6 +1,5 @@
-import ProductManager from '../../services/product_manager.js';
-import { ControllerError } from '../../utils.js';
-import { STATUS_RES_GET } from '../../utils.js';
+import ProductManager from "../../services/product_manager.js";
+import { ControllerError } from "../../utils.js";
 
 /* Instancia de la clase */
 const ProductManagerI = new ProductManager();
@@ -28,6 +27,7 @@ export async function addProduct(req, res) {
 
 /* Modifica un producto por body ,id especificada */
 export async function UpdateProduct(req, res) {
+  console.log(req.body);
   let result = await ProductManagerI.updateProduct(req.body, req.params.pid);
 
   ControllerError(result, res);

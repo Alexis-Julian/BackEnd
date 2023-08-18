@@ -17,4 +17,13 @@
   .panel_chat_grid {
     grid-template-rows: 0.1fr 1fr 0.1fr;
   }
+
+  .input_card {
+    outline-color: transparent;
+  }
+  .input_card:focus {
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+  }
 }

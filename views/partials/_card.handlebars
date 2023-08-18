@@ -1,43 +1,19 @@
-<div
-  class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md overflow-hidden"
->
-  <div
-    class="flex justify-center items-center relative mx-4 -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border shadow-lg shadow-blue-gray-500/40 text-black"
-  >
+<div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md overflow-hidden">
+  <div class="flex justify-center items-center relative mx-4 -mt-6 h-56 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border shadow-lg shadow-blue-gray-500/40 text-black">
     No image
   </div>
   <div class="p-6">
-    <h5
-      class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased"
-    >
+    <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
       <div class="grid grid-rows-2 grid-cols-2 text-center text-neutral-400">
-        <div class="grid grid-rows-1"><span
-            class="text-xs bg-neutral-100 rounded-full"
-          >Categoria</span><span
-            class="text-neutral-600"
-          >{{this.category}}</span></div>
-        <div class="grid grid-rows-1"><span
-            class="text-xs bg-neutral-100 rounded-full"
-          >Price</span><span
-            class="text-neutral-600"
-          >${{this.price}}</span></div>
-        <div class="grid grid-rows-1"><span
-            class="text-xs bg-neutral-100 rounded-full"
-          >Stock</span><span
-            class="text-neutral-600"
-          >{{this.stock}}</span></div>
-        <div class="grid grid-rows-1"><span
-            class="text-xs bg-neutral-100 rounded-full"
-          >Code</span><span class="text-neutral-600">{{this.code}}</span></div>
+        <div class="grid grid-rows-1"><span class="text-xs bg-neutral-100 rounded-full">Categoria</span><span class="text-neutral-600">{{this.category}}</span></div>
+        <div class="grid grid-rows-1"><span class="text-xs bg-neutral-100 rounded-full">Price</span><span class="text-neutral-600">${{this.price}}</span></div>
+        <div class="grid grid-rows-1"><span class="text-xs bg-neutral-100 rounded-full">Stock</span><span class="text-neutral-600">{{this.stock}}</span></div>
+        <div class="grid grid-rows-1"><span class="text-xs bg-neutral-100 rounded-full">Code</span><span class="text-neutral-600">{{this.code}}</span></div>
       </div>
     </h5>
     <div class="flex flex-col text-center">
-      <p
-        class="text-xs bg-neutral-100 text-neutral-600 rounded-full"
-      >Descripcion</p>
-      <p
-        class="font-sans text-base font-light leading-relaxed text-inherit antialiased block text-left"
-      >
+      <p class="text-xs bg-neutral-100 text-neutral-600 rounded-full">Descripcion</p>
+      <p class="font-sans text-base font-light leading-relaxed text-inherit antialiased block text-left">
         {{this.description}}
       </p>
     </div>
@@ -52,5 +28,7 @@
     >
       Agregar al carrito
     </button>
+
   </div>
+
 </div>

@@ -12,9 +12,11 @@ export default class CartFactory {
 
   async addCart() {
     try {
-      let NewCart = cartModel.create({});
+      let NewCart = new cartModel({});
 
-      return await NewCart.save();
+      await NewCart.save();
+
+      return NewCart;
     } catch (error) {
       console.log("Error:", error.message);
       return null;

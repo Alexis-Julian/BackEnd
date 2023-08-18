@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import env from '../../config/enviroment.config.js';
-import { Auth as AuthFactory } from '../../dao/factory.js';
-import { Products as ProductFactory } from '../../dao/factory.js';
+import jwt from "jsonwebtoken";
+import env from "../../config/enviroment.config.js";
+import { Auth as AuthFactory } from "../../dao/factory.js";
+import { Products as ProductFactory } from "../../dao/factory.js";
 
 const AuthFactoryI = new AuthFactory();
 const ProductFactoryI = new ProductFactory();
@@ -17,5 +17,7 @@ export async function getProducts(req, res) {
 
   let { docs } = await ProductFactoryI.getProduct(req.query);
 
-  res.render('home', { docs, user });
+  let isAdmin = user.role === "admin";
+
+  res.render("home", { docs, user, isAdmin: isAdmin });
 }

@@ -1,5 +1,7 @@
 import CartManager from "../../services/cart_manager.js";
 import { ControllerError } from "../../utils.js";
+import jwt from "jsonwebtoken";
+import env from "../../config/enviroment.config.js";
 /* Instanciado de clase manipulacion de productos */
 const CartManagerI = new CartManager();
 
@@ -19,11 +21,12 @@ export async function addCart(req, res) {
 
 /* Agrega un producto a un carrito especificado */
 export async function addProductCart(req, res) {
-  const { cid, pid } = req.params;
+  const { pid } = req.params;
+  const cid = req.session.passport.cart;
 
   const { q } = req.query;
-
-  const result = await CartManagerI.addProductCart(cid, pid, "ADD", q);
+  console.log(pid, cid);
+  const result = await CartManagerI.addProductCart(cid, pid, "ADD", 1 || q);
 
   ControllerError(result, res);
 }

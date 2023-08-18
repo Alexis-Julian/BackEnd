@@ -30,6 +30,7 @@ export default class AuthFactory {
 
   async UserFoundById(id, queries) {
     try {
+      if (id == "admin") return env.ADMIN;
       return await userModel.findByIdAndUpdate(id, queries && queries).select("-password");
     } catch (error) {
       console.log("Error:", error.message);

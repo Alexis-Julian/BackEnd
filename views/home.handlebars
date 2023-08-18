@@ -17,5 +17,10 @@
   </div>
 </div>
 
-<script src="/js/home_view.js" type="module" defer></script>
+{{#if isAdmin}}
+  <script src="/js/pages/home/home_view_admin.js" type="module" defer></script>
+{{else}}
+  <script src="/js/pages/home/home_view_user.js" type="module" defer></script>
+  
+{{/if}}
 

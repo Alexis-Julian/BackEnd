@@ -1,5 +1,6 @@
-import getPageQuery from "./utils.js";
-
+import getPageQuery from "../utils/utils.js";
+import { Alert } from "../utils/utils.js";
+const AlertI = new Alert();
 const form = document.getElementById("form_submit");
 
 async function sendProduct(idp) {
@@ -19,7 +20,6 @@ async function fetchchangeproduct(idp, value) {
 async function removeProduct(idp) {
   let result = await fetch(`http://localhost:8080/api/products/${idp}`, { method: "DELETE" });
   result = await result.json();
-  console.log(result);
   return result;
 }
 
@@ -73,11 +73,15 @@ form.addEventListener("submit", async (e) => {
       form.classList.remove("pointer-events-none");
       break;
     default:
-      await removeProduct(instruction);
+      let result = await removeProduct(instruction);
+      if (result.status === "success") {
+        AlertI.Success("Product successfully removed");
+      } else if (result.status === "error") {
+        AlertI.Error("Product failed to be removed");
+      }
 
       break;
   }
-  /* sendProduct(idp); */
 });
 
 /* Siguiente pagina de productos */

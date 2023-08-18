@@ -124,7 +124,6 @@ function addNewProduct(productId, quantity) {
 }
 
 function updateAddQuantity(quantity) {
-  console.log("Tnedira que pasar por aca", quantity);
   return {
     $mergeObjects: ["$$item", { quantity: { $add: ["$$item.quantity", parseInt(quantity)] } }],
   };

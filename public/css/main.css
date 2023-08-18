@@ -1187,12 +1187,18 @@ html {
 
 .input_card {
   outline-color: transparent;
+  background-color: white;
 }
 
 .input_card:focus {
   height: 100%;
   padding: 0px;
   margin: 0;
+}
+
+input[disabled] {
+  background-color: white;
+  /* Cambia el color de fondo */
 }
 
 .sr-only {
@@ -1294,18 +1300,6 @@ html {
 
 .top-3 {
   top: 0.75rem;
-}
-
-.top-1 {
-  top: 0.25rem;
-}
-
-.bottom-20 {
-  bottom: 5rem;
-}
-
-.top-20 {
-  top: 5rem;
 }
 
 .z-10 {
@@ -2022,11 +2016,6 @@ html {
 .bg-zinc-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(63 63 70 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {

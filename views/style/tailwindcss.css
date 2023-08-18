@@ -20,10 +20,14 @@
 
   .input_card {
     outline-color: transparent;
+    background-color: white;
   }
   .input_card:focus {
     height: 100%;
     padding: 0px;
     margin: 0;
+  }
+  input[disabled] {
+    background-color: white; /* Cambia el color de fondo */
   }
 }

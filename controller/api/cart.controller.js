@@ -22,10 +22,11 @@ export async function addCart(req, res) {
 /* Agrega un producto a un carrito especificado */
 export async function addProductCart(req, res) {
   const { pid } = req.params;
+
   const cid = req.session.passport.cart;
 
   const { q } = req.query;
-  console.log(pid, cid);
+
   const result = await CartManagerI.addProductCart(cid, pid, "ADD", 1 || q);
 
   ControllerError(result, res);

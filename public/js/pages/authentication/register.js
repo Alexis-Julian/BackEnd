@@ -1,5 +1,6 @@
-import { ConfirmPassword } from "/js/utils.js";
-import { Alert } from "./utils.js";
+import { ConfirmPassword } from "/js/pages/utils/utils.js";
+import { Alert } from "../utils/utils.js";
+
 const form = document.getElementById("form");
 const reload = document.getElementById("charge");
 
@@ -23,9 +24,8 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(register),
     });
     let json = await response.json();
-    if (json.status === "SUCCESS")
-      IAlert.Success("Account Created")
-      return (window.location.href = "http://localhost:8080/view/products");
+    if (json.status === "SUCCESS") IAlert.Success("Account Created");
+    return (window.location.href = "http://localhost:8080/view/products");
 
     IAlert.Error("Account already exists");
   } else {

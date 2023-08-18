@@ -1,6 +1,6 @@
 const form = document.getElementById("form");
 const reload = document.getElementById("charge");
-import { Alert } from "./utils.js";
+import { Alert } from "../utils/utils.js";
 /* Provisorio  */
 const IAlert = new Alert();
 

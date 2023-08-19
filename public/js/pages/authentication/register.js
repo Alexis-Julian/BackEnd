@@ -23,9 +23,13 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(register),
     });
-    let json = await response.json();
-    if (json.status === "SUCCESS") IAlert.Success("Account Created");
-    return (window.location.href = "http://localhost:8080/view/products");
+
+    let data = await response.json();
+
+    if (data.status === "success") {
+      IAlert.Success("Account Created");
+      return (window.location.href = "http://localhost:8080/view/products");
+    }
 
     IAlert.Error("Account already exists");
   } else {

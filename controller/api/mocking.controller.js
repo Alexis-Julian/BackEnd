@@ -10,6 +10,6 @@ export async function getProducts(req, res) {
 
 export async function createProduct(req, res) {
   let result = 1;
-
+  const {} = req.body;
   ControllerError(result, res);
 }

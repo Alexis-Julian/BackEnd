@@ -2,6 +2,7 @@ import FriendManager from "../../services/friend_manager.js";
 import jwt from "jsonwebtoken";
 import env from "../../config/enviroment.config.js";
 import { ControllerError } from "../../utils.js";
+import { io } from "../../index.js";
 
 const FriendManagerI = new FriendManager();
 
@@ -49,6 +50,18 @@ export async function requestFriend(req, res) {
   let { reqfriend } = req.body;
 
   let result = await FriendManagerI.requestFriend(reqfriend, id);
+
+  if (result) io.emit(`${reqfriend}:solicitud`, result);
+
+  ControllerError(result, res);
+}
+
+export async function getRequestFriend(req, res) {
+  let token = req.session.passport.user;
+
+  let { id } = jwt.verify(token, env.TOKEN);
+
+  let result = await FriendManagerI.getrequestFriend(id);
 
   ControllerError(result, res);
 }

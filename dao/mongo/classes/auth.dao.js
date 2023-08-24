@@ -55,4 +55,11 @@ export default class AuthFactory {
       return null;
     }
   }
+  async getRequestUser(id, queries) {
+    try {
+      return await userModel.findByIdAndUpdate(id, queries && queries).populate("request.user");
+    } catch (error) {
+      console.log("Error:", error.message);
+    }
+  }
 }

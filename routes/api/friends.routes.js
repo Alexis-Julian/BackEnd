@@ -1,6 +1,6 @@
 import express from "express";
 
-import { addFriend, searchFriend, requestFriend, declineFriend } from "../../controller/api/friend.controller.js";
+import { addFriend, searchFriend, requestFriend, declineFriend, getRequestFriend } from "../../controller/api/friend.controller.js";
 
 export const app = express.Router();
 
@@ -15,3 +15,5 @@ app.post("/solicitude/accept", addFriend);
 
 /* Rechaza la solcitud de la persona ha agregar */
 app.post("/solicitude/decline", declineFriend);
+
+app.get("/search/request", getRequestFriend);

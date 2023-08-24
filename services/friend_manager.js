@@ -1,4 +1,3 @@
-import ObjectID from "bson-objectid";
 import AuthFactory from "../dao/mongo/classes/auth.dao.js";
 
 const AuthFactoryI = new AuthFactory();
@@ -26,6 +25,12 @@ export default class FriendManager {
   async requestFriend(idfriend, iduser) {
     let user = await AuthFactoryI.UserFoundById(idfriend, { $push: { request: { user: iduser } } });
     return user;
+  }
+
+  async getrequestFriend(iduser) {
+    let result = await AuthFactoryI.getRequestUser(iduser);
+    if (result) return result.request;
+    return result;
   }
 }
 

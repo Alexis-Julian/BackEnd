@@ -122,12 +122,13 @@
           </div>
         </div>
         {{!Bandeja de solicitudes }}
-        <div>
+        <div id="request_petitions">
           <button
             type="button"
             data-modal-target="request-modal"
             data-modal-toggle="request-modal"
             class="text-gray-900 hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
+            id="btn_request_petitions"
           >
             <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path
                 stroke-linecap="round"
@@ -167,30 +168,7 @@
               <div>
                 <form id="form_requestfriend">
                   <ul id="container_requestfriend">
-                    {{#each user.request}}
-                      <hr />
-                      <li class="flex justify-between gap-x-6 py-5 bg-white hover:bg-gray-50 rounded-lg">
-                        <div class="flex gap-x-4 pl-2">
-                          <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{this.user.img}}" />
-                          <div class="min-w-0 flex-auto">
-                            <p class="text-sm font-semibold leading-6 text-gray-900">{{this.user.username}}</p>
-                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{this.user.email}}</p>
-                          </div>
-                        </div>
-                        <button
-                          type="submit"
-                          class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                          name="{{this.user._id}}"
-                          id="accept"
-                        >Aceptar</button>
-                        <button
-                          name="{{this.user._id}}"
-                          type="submit"
-                          id="decline"
-                          class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                        >Rechazar</button>
-                      </li>
-                    {{/each}}
+                    {{! ------ }}
                   </ul>
                 </form>
               </div>
@@ -198,7 +176,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="flex flex-col flex-auto h-full p-6 panel">
       <i id="panel_message_view">Ingrese ha algunos de sus contactos para emepezar a chatear</i>

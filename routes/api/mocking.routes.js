@@ -1,9 +1,7 @@
 import express from "express";
-
+import { getProducts } from "../../controller/api/mocking.controller.js";
 export const app = express.Router();
 
-app.get("/get", (req, res) => {
-  res.send(404);
-});
+app.get("/", getProducts);
 
 app.post("/post", (req, res) => {});

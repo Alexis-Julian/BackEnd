@@ -42,25 +42,13 @@ export const FETCHINGS = async (url, params, method) => {
   return res;
 };
 
-export const PRODUCT_DICCIONARY = [
-  "category",
-  "code",
-  "description",
-  "price",
-  "status",
-  "stock",
-  "title",
-];
+export const PRODUCT_DICCIONARY = ["category", "code", "description", "price", "status", "stock", "title"];
 
 export const STATUS_RES_GET = (product, res) => {
   if (product[1] === STATUS_TYPES.ERROR) {
-    res
-      .status(400)
-      .json({ status: "ERROR", msg: "Syntax Error", data: product[0] });
+    res.status(400).json({ status: "ERROR", msg: "Syntax Error", data: product[0] });
   } else if (product[1] === STATUS_TYPES.INFO) {
-    res
-      .status(200)
-      .json({ status: "SUCCESS", msg: "Fetch products", data: product[0] });
+    res.status(200).json({ status: "SUCCESS", msg: "Fetch products", data: product[0] });
   } else if (product[1] === STATUS_TYPES.WARNING) {
     res.status(200).json({
       status: "WARNING",
@@ -87,4 +75,14 @@ export function ControllerError(data, res) {
     });
 
   res.send({ status: "success", result: data });
+}
+
+export function generateRandomCode(length) {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let code = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    code += characters.charAt(randomIndex);
+  }
+  return code;
 }

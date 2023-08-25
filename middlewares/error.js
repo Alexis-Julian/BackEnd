@@ -1,6 +1,6 @@
 import EErrors from "../services/errors/enums.js";
 function ErrorHanlder(err, req, res, next) {
-  console.log(err);
+  console.log(err.cause);
   switch (err.code) {
     case EErrors.INVALID_TYPE_ERROR:
       res.send({ status: "error", err: err.name });

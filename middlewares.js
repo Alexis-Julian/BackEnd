@@ -13,6 +13,7 @@ import { app as RouteCartView } from "./routes/views/cart_views.routes.js";
 import { app as AuthView } from "./routes/views/auth_views.routes.js";
 import { app as RouteSession } from "./routes/api/session.routes.js";
 import { app as RouteChatView } from "./routes/views/chat_views.routes.js";
+import { app as LoggerTest } from "./routes/api/logtest.routes.js";
 /* ---------- 0 -------------------- */
 import passport from "passport";
 import cookieParser from "cookie-parser";
@@ -55,9 +56,11 @@ export default (app) => {
   app.use("/api/friends", RouteFriend);
   app.use("/api/mockingproducts", RouteMockingProduct);
   app.use("/api/cookie", CookieRoute);
+  app.use("/api/loggerTest", LoggerTest);
   app.use("/view/products", RouteProductView);
   app.use("/view/cart", RouteCartView);
   app.use("/view/chat", RouteChatView);
   app.use("/view/user", AuthView);
+
   app.use(errorHandler);
 };

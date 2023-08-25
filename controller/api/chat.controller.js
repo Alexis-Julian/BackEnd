@@ -1,4 +1,4 @@
-import ChatManager from "../../services/chat_manager.js";
+import ChatManager from "../../services/chat.service.js";
 import { ControllerError } from "../../utils.js";
 import jwt from "jsonwebtoken";
 import env from "../../config/enviroment.config.js";

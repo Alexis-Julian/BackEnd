@@ -1,4 +1,4 @@
-import CartManager from "../../services/cart_manager.js";
+import CartManager from "../../services/cart.service.js";
 import { ControllerError } from "../../utils.js";
 import jwt from "jsonwebtoken";
 import env from "../../config/enviroment.config.js";

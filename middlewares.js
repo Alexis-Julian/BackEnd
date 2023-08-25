@@ -23,6 +23,7 @@ import MongoStore from "connect-mongo";
 import morgan from "morgan";
 /*  */
 import { file } from "./config.js";
+import errorHandler from "./middlewares/error.js";
 
 export default (app) => {
   /* app.use(morgan('dev')); */
@@ -42,6 +43,10 @@ export default (app) => {
       saveUninitialized: false,
     })
   );
+
+  app.use(express.static(file + "/public"));
+  app.use(express.urlencoded({ extended: true }));
+
   app.use("/api/user", AuthUser);
   app.use("/api/sessions", RouteSession);
   app.use("/api/chat", RouteChat);
@@ -54,6 +59,5 @@ export default (app) => {
   app.use("/view/cart", RouteCartView);
   app.use("/view/chat", RouteChatView);
   app.use("/view/user", AuthView);
-  app.use(express.static(file + "/public"));
-  app.use(express.urlencoded({ extended: true }));
+  app.use(errorHandler);
 };

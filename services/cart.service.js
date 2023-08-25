@@ -1,7 +1,7 @@
 /* Classes */
 import { Cart as CartFactory } from "../dao/factory.js";
-import ProductManager from "./product_manager.js";
-import TicketManager from "./ticket_manager.js";
+import ProductManager from "./product.service.js";
+import TicketManager from "./ticket.service.js";
 import TicketDTO from "./DTOs/ticket.dto.js";
 
 /* Instace Classes */

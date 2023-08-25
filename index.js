@@ -37,4 +37,5 @@ config(app);
 
 /* Server Listen */
 httpserver.listen(env.PORT);
+
 console.log(chalk.blueBright("Server listening on port", +env.PORT));

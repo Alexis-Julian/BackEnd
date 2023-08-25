@@ -1,5 +1,5 @@
 import { ControllerError } from "../../utils.js";
-import MockingManager from "../../services/mocking_manager.js";
+import MockingManager from "../../services/mocking.service.js";
 const MockingManagerI = new MockingManager();
 
 export async function getProducts(req, res) {
@@ -8,8 +8,11 @@ export async function getProducts(req, res) {
   ControllerError(product, res);
 }
 
-export async function createProduct(req, res) {
-  let result = 1;
-  const {} = req.body;
-  ControllerError(result, res);
+export async function createProduct(req, res, next) {
+  try {
+    let result = await MockingManagerI.createProduct(req.body);
+    ControllerError(result, res);
+  } catch (err) {
+    next(err);
+  }
 }

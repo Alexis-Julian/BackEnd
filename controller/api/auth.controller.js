@@ -1,4 +1,4 @@
-import AuthManager from "../../services/auth_manager.js";
+import AuthManager from "../../services/auth.service.js";
 import { ControllerError } from "../../utils.js";
 import userModel from "../../dao/mongo/models/user.model.js";
 

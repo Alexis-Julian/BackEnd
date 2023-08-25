@@ -1,4 +1,4 @@
-import FriendManager from "../../services/friend_manager.js";
+import FriendManager from "../../services/friend.service.js";
 import jwt from "jsonwebtoken";
 import env from "../../config/enviroment.config.js";
 import { ControllerError } from "../../utils.js";

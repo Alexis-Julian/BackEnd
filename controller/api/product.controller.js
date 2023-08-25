@@ -1,4 +1,4 @@
-import ProductManager from "../../services/product_manager.js";
+import ProductManager from "../../services/product.service.js";
 import { ControllerError } from "../../utils.js";
 
 /* Instancia de la clase */

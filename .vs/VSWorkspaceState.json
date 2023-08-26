@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\routes",
+    "\\routes\\api",
+    "\\services"
+  ],
+  "SelectedNode": "\\routes\\api\\friends.routes.js",
+  "PreviewInSolutionExplorer": false
+}

@@ -5,11 +5,11 @@ export const app = express.Router();
 
 app.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
 
-app.get(
-  "/githubcallback",
-  passport.authenticate("github", { failureRedirect: "/view/user/register" }),
-  AuthenticateToken
-);
+app.get("/githubcallback", passport.authenticate("github", { failureRedirect: "/view/user/register" }), AuthenticateToken);
+
+app.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+app.get("/googlecallback", passport.authenticate("google", { failureRedirect: "/view/user/register" }), AuthenticateToken);
 
 /* Lo estoy usando de test "Ignorar" */
 app.get("/establecer", (req, res) => {

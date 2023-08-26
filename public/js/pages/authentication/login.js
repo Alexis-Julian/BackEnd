@@ -1,5 +1,7 @@
 const form = document.getElementById("form");
 const reload = document.getElementById("charge");
+const btn_github = document.getElementById("github");
+const btn_google = document.getElementById("google");
 import { Alert } from "../utils/utils.js";
 /* Provisorio  */
 const IAlert = new Alert();
@@ -33,9 +35,12 @@ form.addEventListener("submit", (e) => {
   fetchData(login);
 });
 
-const btn_github = document.getElementById("github");
-
 btn_github.addEventListener("click", (e) => {
   reload.classList.add("animate-spin");
   window.location.href = "/api/sessions/github";
+});
+
+btn_google.addEventListener("click", (e) => {
+  reload.classList.add("animate-spin");
+  window.location.href = "/api/sessions/google";
 });

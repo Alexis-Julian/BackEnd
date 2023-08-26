@@ -28,7 +28,7 @@ export default class MockingManager {
   async createProduct(body) {
     let { title, description, price, code, stock, status, category } = body;
     if (!title || !description || !price || !code || !stock || !status || !category) {
-      throw new CustomError({ name: "Product creation error", cause: generateProductErrorInfo(body), message: "Error create product", code: EErrors.INVALID_TYPE_ERROR });
+      throw new CustomError({ name: "Product creation error", cause: generateProductErrorInfo(body), message: "Error create product", code: EErrors.INVALID_TYPE_INFO });
     } else {
       return "Product creation successfuly";
     }

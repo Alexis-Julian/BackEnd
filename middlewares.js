@@ -31,6 +31,9 @@ export default (app) => {
   app.use(express.json());
   app.use(cookieParser());
   app.use(passport.initialize());
+
+  /* app.use(passport.session()); */
+
   app.use(
     session({
       store: MongoStore.create({
@@ -57,6 +60,7 @@ export default (app) => {
   app.use("/api/mockingproducts", RouteMockingProduct);
   app.use("/api/cookie", CookieRoute);
   app.use("/api/loggerTest", LoggerTest);
+
   app.use("/view/products", RouteProductView);
   app.use("/view/cart", RouteCartView);
   app.use("/view/chat", RouteChatView);

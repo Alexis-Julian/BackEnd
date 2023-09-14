@@ -1,0 +1,70 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtiene por defecto 10 productos
+      tags:
+        - Products
+      responses:
+        "200":
+          description: "Los productos fueron devueltos satisfactoriamente"
+        "500":
+          description: "Error del servidor. Usualmente generando la query o falla la conexion a la DB"
+    post:
+      tags:
+        - Products
+      summary: Agrega un producto
+      responses:
+        "200":
+          description: "El producto fue agregado correctamente"
+        "500":
+          description: "Error del servidor. Usualmente generando la query o falla la conexion a la DB "
+
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto en especifico
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto que se desea solicitar
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: "Producto encontrado"
+        "500":
+          description: "Producto no encontrado"
+    put:
+      summary: "Edita un producto en especifico"
+      tags:
+        - Products
+      parameters:
+        -name: pid
+        in: path
+        required: true
+        description: id del producto que desea modificar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Producto modificado correctamente
+        "500":
+          description: "Modificacion rechazada o producto no encontrado"
+    delete:
+      tags:
+        - Products
+      summary: "Eliminar un producto"
+      parameters:
+        -name: pid
+        in: path
+        required: true
+        description: id del producto que desea eliminar
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Producto eliminado correctamente
+        "500":
+          description: Producto no encontrado

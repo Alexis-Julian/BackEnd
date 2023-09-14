@@ -1,5 +1,6 @@
 import express from "express";
 import { logger } from "../../utils/logger.js";
+import { transport } from "../../libs/nodemailer.js";
 
 export const app = express.Router();
 
@@ -31,4 +32,16 @@ app.get("/verbose", (req, res) => {
 app.get("/debug", (req, res) => {
   logger.debug("debug received");
   res.send("debug testing");
+});
+
+app.get("/mail", async (req, res) => {
+  let result = await transport.sendMail({
+    from: "buzzar50@gmail.com",
+    to: "alexisjrojas@hotmail.es",
+    subject: "Correo de prueba",
+    html: "<div><h1>Esto es un test</h1></div>",
+    attachments: [],
+  });
+  console.log("Correo enviado");
+  res.send("Test");
 });

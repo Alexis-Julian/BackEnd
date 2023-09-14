@@ -19,3 +19,12 @@ export const authUser = (req, res, next) => {
     next();
   });
 };
+
+export const authPassword = (req, res, next) => {
+  const { token } = req.params;
+  jwt.verify(token, env.TOKEN, (err, token) => {
+    if (err) return res.status(401).json({ message: "time expired" });
+    req.email = token.email;
+    next();
+  });
+};

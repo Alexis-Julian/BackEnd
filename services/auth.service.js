@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { createToken } from "../libs/jwt.js";
 import { Auth as AuthFactory, Cart as CartFactory } from "../dao/factory.js";
-
+import { sendMail } from "../libs/nodemailer.js";
 let AuthFactoryI = new AuthFactory();
 let CartFactoryI = new CartFactory();
 
@@ -11,7 +11,7 @@ export default class AuthManager {
     const isAdmin = AuthFactoryI.UserIsAdmin(user);
 
     if (isAdmin) {
-      let token = await createToken({ id: "admin" });
+      let token = await createToken({ id: "admin" }, "1d");
       callback(token);
       return token;
     }
@@ -25,7 +25,7 @@ export default class AuthManager {
     if (!passhash) return null;
 
     /* Creacion del token */
-    let token = await createToken({ id: userfetch._id });
+    let token = await createToken({ id: userfetch._id }, "1d");
 
     callback(token, userfetch.cart);
     return token;
@@ -50,11 +50,19 @@ export default class AuthManager {
 
     if (!user) return null;
 
-    let token = await createToken({ id: user._id });
+    let token = await createToken({ id: user._id }, "1d");
 
     callback(token, cart._id);
 
     return token;
+  }
+
+  async recoverUser(email) {
+    let token = await createToken({ email: email }, "1d");
+
+    let response = await sendMail(email, token);
+
+    return response;
   }
 }
 

@@ -74,7 +74,7 @@ export function ControllerError(data, res) {
       error: "Something went wrong, try again later",
     });
 
-  res.send({ status: "success", result: data });
+  res.status(200).json({ status: "success", result: data });
 }
 
 export function generateRandomCode(length) {

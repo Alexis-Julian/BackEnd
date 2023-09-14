@@ -15,4 +15,5 @@ export default {
   TOKEN: process.env.TOKEN_JWT,
   ADMIN: JSON.parse(process.env.ADMIN),
   PERSISTENCE: process.env.PERSISTENCE,
+  GOOGLE: process.env.GOOGLE_PASSWORD,
 };

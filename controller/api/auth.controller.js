@@ -22,6 +22,14 @@ export async function AuthRegister(req, res) {
   ControllerError(user, res);
 }
 
+export async function AuthRecovery(req, res) {
+  let { email } = req.params;
+
+  let data = await AuthManagerI.recoverUser(email);
+
+  ControllerError(data, res);
+}
+
 export async function AuthLogout(req, res) {
   req.session.destroy();
   res.clearCookie("token").status(202).send("Cookie Removed");

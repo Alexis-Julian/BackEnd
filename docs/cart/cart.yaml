@@ -1,0 +1,77 @@
+paths:
+  /api/cart/{cid}:
+    get:
+      summary: "Obtiene un carrito especificado"
+      tags:
+        - Cart
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito que se quiere obtener
+          schema:
+            $type: String
+      response:
+        "200":
+          description: Carrito obtenido exitosamente
+        "500":
+          description: Carrito no encontrado
+    put:
+      summary: "Edita un carrito"
+      tags:
+        - Cart
+      parameters:
+        -name: cid
+        in: path
+        required: true
+        description: id del carrtio que se quiere eliminar todos los productos del carrito
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: Productos eliminados correctamente
+        "500":
+          description: Carrito no encontrado o problemas con la base de datos
+  /api/cart/:
+    post:
+      summary: "Crea un carrito"
+      tags:
+        - Cart
+      response:
+        "200":
+          description: "Carrito creado exitosamente"
+        "500":
+          description: "Problemas con la base de datos"
+  /api/cart/{cid}/product/{pid}:
+    post:
+      summary: "Agrega un producto a un carrito especifico"
+      tags:
+        - Cart
+      parameters:
+        -name: cid pid
+        in: path
+        required: true
+        description: id del carrito que se quiere agregar un producto
+        schema:
+          $type: String
+      response:
+        "200":
+          description: El producto se agrego correctamente
+        "500":
+          description: El producto no fue encontrado o hubo un error en la DB
+    put:
+      summary: "Modifica la cantidad de un producto espcificado y un carrito especificado"
+      tags:
+        - Cart
+      parameters:
+        -name: cid
+        in: path
+        required: true
+        description: asdasd
+        schema:
+          $type: String
+      response:
+        "200":
+          description: El producto se actualizdo correctamente
+        "500":
+          description: Hubo un error en buscar el producto en el carrito o fallo la DB

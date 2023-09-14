@@ -68,3 +68,30 @@ paths:
           description: Producto eliminado correctamente
         "500":
           description: Producto no encontrado
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: El título del producto.
+        description:
+          type: string
+          description: La descripción del producto.
+        price:
+          type: number
+          description: El precio del producto.
+        code:
+          type: string
+          description: El código único del producto.
+        stock:
+          type: number
+          description: La cantidad en stock del producto.
+        status:
+          type: boolean
+          description: El estado del producto (activo/inactivo).
+        category:
+          type: string
+          description: La categoría del producto.

@@ -90,3 +90,21 @@ paths:
           description: El producto se actualizdo correctamente
         "500":
           description: Hubo un error en buscar el producto en el carrito o fallo la DB
+
+components:
+  schemas:
+    Cart:
+      $type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo.
+        products:
+          type: array
+          item:
+            product:
+              type: string
+              description: El ID del producto.
+            quantity:
+              type: number
+              description: La cantidad de este producto en el carrito.

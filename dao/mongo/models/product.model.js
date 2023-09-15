@@ -1,3 +1,4 @@
+import ObjectID from "bson-objectid";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
@@ -34,6 +35,11 @@ const ProductSchema = new mongoose.Schema(
     category: {
       required: true,
       type: String,
+    },
+    owner: {
+      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
     },
   },
   { versionKey: false }

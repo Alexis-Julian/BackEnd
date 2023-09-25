@@ -52,6 +52,7 @@ describe("TEST API", () => {
       expect(_body.user.email).to.be.eql(mockUser.email);
     });
   });
+
   describe("ENDPOINT Products", () => {
     it("GET", async () => {
       const response = await requester.get("api/products");

@@ -53,6 +53,8 @@ describe("TEST API", () => {
     });
   });
 
+  }); */
+
   describe("ENDPOINT Products", () => {
     it("GET", async () => {
       const response = await requester.get("api/products");

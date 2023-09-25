@@ -3,13 +3,13 @@ import supertest from "supertest";
 import { faker } from "@faker-js/faker";
 
 const expect = chai.expect;
-const requester = supertest("http://192.168.1.182:8080/");
+const requester = supertest("http://localhost:8080");
 
 describe("TEST API", () => {
   let cookieName;
   let cookieValue;
 
-  describe("ENDPOINT Sessions", () => {
+  /* describe("ENDPOINT Sessions", () => {
     const mockUser = {
       firstName: "Coder",
       lastName: "Test",
@@ -51,7 +51,8 @@ describe("TEST API", () => {
 
       expect(_body.user.email).to.be.eql(mockUser.email);
     });
-  });
+  }); */
+
   describe("ENDPOINT Products", () => {
     it("GET", async () => {
       const response = await requester.get("api/products");

@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js --mode PRODUCTION",
-    "dev": "nodemon -e yaml,js index.js --mode DEVELOPMENT"
+    "dev": "nodemon -e yaml,js index.js --mode DEVELOPMENT",
+    "test":"mocha --timeout 10000 test/supertest.test.js"
   },
   "author": "",
   "license": "ISC",

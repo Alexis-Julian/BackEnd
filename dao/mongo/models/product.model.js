@@ -36,11 +36,11 @@ const ProductSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
-    owner: {
+    /* owner: {
       required: true,
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-    },
+    }, */
   },
   { versionKey: false }
 );

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js --mode PRODUCTION",
     "dev": "nodemon -e yaml,js index.js --mode DEVELOPMENT",
-    "test":"mocha --timeout 10000 test/supertest.test.js"
+    "test": "mocha --timeout 1000 test/supertest.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -47,6 +47,7 @@
     "chalk": "^5.2.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
     "tailwindcss": "^3.3.2"
   },
   "repository": {

@@ -57,7 +57,7 @@ const specs = swaggerJSDoc({
 });
 
 export default (app) => {
-  //app.use(morgan("dev"));
+  app.use(morgan("dev"));
   app.use(express.json());
   app.use(cookieParser());
   app.use(passport.initialize());

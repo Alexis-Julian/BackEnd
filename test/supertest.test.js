@@ -124,5 +124,7 @@ describe("TEST API", () => {
     });
   });
 
-  describe("ENDPOINT Sessions", async () => {});
+  describe("ENDPOINT Sessions", async () => {
+    /* Tengo mal los contraladores en proceso de arreglado */
+  });
 });

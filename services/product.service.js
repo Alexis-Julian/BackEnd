@@ -1,5 +1,5 @@
-import { PRODUCT_DICCIONARY } from '../utils.js';
-import { Products } from '../dao/factory.js';
+import { PRODUCT_DICCIONARY } from "../utils.js";
+import { Products } from "../dao/factory.js";
 
 const ProductFactoryI = new Products();
 
@@ -22,7 +22,7 @@ export default class ProductManager {
     let PossibleUpdate = ValidationCorrectlyFields(change);
 
     if (!PossibleUpdate) {
-      console.log('Error: error in fields update');
+      console.log("Error: error in fields update");
       return null;
     }
 
@@ -66,13 +66,13 @@ function ValidationCorrectlyFields(change) {
 
 function ValidationQuery({ limit, page, query, sort }) {
   const sortt = sort ? Object.fromEntries([[sort, -1]]) : undefined;
-  const category = query ? Object.fromEntries([['category', query]]) : undefined;
+  const category = query ? Object.fromEntries([["category", query]]) : undefined;
 
   const filters = {
     limit: limit > 0 ? limit : 10,
     page: page > 0 ? page : 1,
     sort: sortt,
-    select: '-__v',
+    select: "-__v",
   };
 
   return [category, filters];

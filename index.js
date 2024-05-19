@@ -10,7 +10,7 @@ import { SocketIo } from "./sockets.js";
 import { Server as ServerWebSocket } from "socket.io";
 import chalk from "chalk";
 import env from "./config/enviroment.config.js";
-
+import { faker } from "@faker-js/faker";
 /* Initialization  Http Server*/
 const httpserver = http.createServer(app);
 
@@ -27,6 +27,8 @@ initializePassport();
 
 /* MiddleWares */
 middlewares(app);
+
+/* cambiando(); */
 
 /* Sockets */
 export const io = new ServerWebSocket(httpserver);
